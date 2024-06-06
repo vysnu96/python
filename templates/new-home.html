@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  .add{
+  background-color: #2d9600;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  text-align: right;
+  }
+
+  #submitButton{
+  cursor: pointer;
+  text-align: right;
+  }
+
+<!--  .edit{-->
+<!--  background-color: #0359a3;-->
+<!--  color: white;-->
+<!--  border-radius: 10px;-->
+<!--  padding: 10px 20px;-->
+<!--  font-size: 16px;-->
+<!--  border: none;-->
+<!--  text-align: right;-->
+<!--  }-->
+
+<!--  .delete{-->
+<!--  background-color: #f55f67;-->
+<!--  color: white;-->
+<!--  border-radius: 10px;-->
+<!--  padding: 10px 20px;-->
+<!--  font-size: 16px;-->
+<!--  border: none;-->
+<!--  text-align: right;-->
+  }
+
+
+.search-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the search bar to the right */
+    padding: 20px;
+
+}
+
+.search-bar {
+    width: 200px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #0066cc;
+}
+
+.search-button {
+    padding: 10px;
+    border: none;
+    border-left: none;
+    border-radius: 20px;
+    background-color: #bebfbd;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #a1a39e;
+}
+  .bi-x::before {
+    content: "×";
+}
+
+</style>
+<body>
+
+<!--Search functionality-->
+<div class="container mt-3">
+  <div class="search-container">
+    <form method="post" action="search">
+        <input type="text" placeholder="Search..." class="search-bar" name="query">
+        <button type="submit" class="search-button">Search </button>
+    </form>
+</div>
+
+<!--Page Title-->
+<h2>User Details</h2>
+
+<!--Add User button-->
+  <div class="d-flex justify-content-end mb-2" style="text-align:right">
+    <form action="add_user" method="get">
+      <button class="add">Add User</button>
+    </form>
+  </div>
+  <br>
+
+<!--User Details Table-->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in result %}
+    <tr>
+      {% for j,k in i.items() %}
+          <td>{{k}}</td>
+      {% endfor %}
+      <td>
+        <button class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+
+</div>
+
+<!--Modal design starts here-->
+<!--  My Modal   -->
+
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Details</h4>
+        </div>
+        <div class="modal-body">
+
+          <form method="post" action="modify">
+            <label for="id">ID</label><br>
+            <input type="text" name="id" id="id">
+            <br><br>
+            <label for="name">Name</label><br>
+            <input type="text" name="name" id="name">
+            <br><br>
+            <label for="age">Age</label><br>
+            <input type="number" name="age" id="age">
+            <br><br>
+            <label for="gender">Gender</label><br>
+            <input type="text" name="gender" id="gender">
+            <br><br>
+            <label for="city">City</label><br>
+            <input type="text" name="city" id="city">
+            <br><br>
+            <label for="state">State</label><br>
+            <input type="text" name="state" id="state">
+            <br><br>
+            <label for="country">Country</label><br>
+            <input type="text" name="country" id="country">
+            <br><br>
+            <input type="submit" name="button" id="submitButton"/>
+            <br><br>
+          </form>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.edit-btn').forEach(function(button) {
+      button.addEventListener('click', function() {
+          // Get the current row
+          var row = this.closest('tr');
+
+          // Get data from the row's <td> elements
+          var id = row.cells[0].textContent;
+          var name = row.cells[1].textContent;
+          var age = row.cells[2].textContent;
+          var gender = row.cells[3].textContent;
+          var city = row.cells[4].textContent;
+          var state = row.cells[5].textContent;
+          var country = row.cells[6].textContent;
+
+          // Now you can use these variables to populate the modal fields or for any other purpose
+          console.log("Name: " + name);
+          console.log("Age: " + age);
+          console.log("Gender: " + gender);
+
+          // Example of populating modal fields (assuming you have these input fields in your modal)
+          document.querySelector('#editModal #id').value = id;
+          document.querySelector('#editModal #name').value = name;
+          document.querySelector('#editModal #age').value = age;
+          document.querySelector('#editModal #gender').value = gender;
+          document.querySelector('#editModal #city').value = city;
+          document.querySelector('#editModal #state').value = state;
+          document.querySelector('#editModal #country').value = country;
+      });
+  });
+});
+
+
+</script>
+</html>
