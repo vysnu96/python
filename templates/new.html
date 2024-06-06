@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Page</title>
+</head>
+<style>
+    input {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    border-style: 5px;
+    }
+</style>
+<body>
+<div align="center">
+    <form method="post" action="update" id="myForm">
+        <input type="text" placeholder="Key" name="key" autofocus="autofocus"/>
+        <input type="text" placeholder="Value" name="value" /> <br>
+        <input type="submit" name="btn" id="submitButton"/>
+    </form>
+</div>
+{{ error|safe }}
+<div align="center">
+{% if dict|length > 0 %}
+    {% for i,j in dict.items() %}
+        {{ i }} : {{ j }}
+    {% endfor %}
+{% endif %}
+</div>
+
+<script>
+        // Get the form element
+        const form = document.getElementById('myForm');
+
+        // Add an event listener to the form
+        form.addEventListener('keydown', function(event) {
+            // Check if the pressed key is Enter
+            if (event.key === 'Enter') {
+                // Prevent the default action
+                event.preventDefault();
+                // Trigger the submit button click
+                document.getElementById('submitButton').click();
+            }
+        });
+</script>
+
+</body>
+</html>
