@@ -1,3 +1,6 @@
+import json
+
+from bson import ObjectId
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from pymongo import MongoClient
 
@@ -12,12 +15,6 @@ collection = database['details']
 @app.route('/')
 def default():
     users = collection.find({})
-    # results = []
-    # for x in users:
-    #     str(x["_id"])
-    #     results.append(i)
-    # # users = jsonify(users)
-    # print(results)
     print(users)
     return render_template('new-home.html', result=users)
 
@@ -45,6 +42,28 @@ def write():
         is_entered = collection.count_documents({"name": entered_name})
         if is_entered > 0:
             return render_template('add-user.html', value="Data inserted successfully")
+
+@app.route('/get_user', methods=['POST','GET'])
+def get_user():
+    id = request.form.get('Id')
+    print(f"received ID:{id}")
+    user = collection.find_one({"_id":ObjectId(id)})
+    user["_id"] = str(user["_id"])
+    return user
+
+@app.route('/update', methods=['POST','GET'])
+def update():
+    new_dict = {}
+    obj_id = request.form.get("id")
+    new_dict["name"] = request.form.get("name")
+    new_dict["age"] = request.form.get("age")
+    new_dict["gender"] = request.form.get("gender")
+    new_dict["city"] = request.form.get("city")
+    new_dict["state"] = request.form.get("state")
+    new_dict["country"] = request.form.get("country")
+    update_doc = {"$set": new_dict}
+    collection.update_one({"_id":ObjectId(obj_id)}, update_doc)
+    return redirect('/')
 
 
 @app.route('/search', methods=['POST', 'GET'])
