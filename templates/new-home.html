@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
@@ -123,13 +124,18 @@
     <tbody>
     {% for i in result %}
     <tr>
-      {% for j,k in i.items() %}
-          <td>{{k}}</td>
-      {% endfor %}
-      <td>
-        <button class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal">Edit</button>
-        <button class="btn btn-danger">Delete</button>
-      </td>
+          <td>{{i._id}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.age}}</td>
+          <td>{{i.gender}}</td>
+          <td>{{i.city}}</td>
+          <td>{{i.state}}</td>
+          <td>{{i.country}}</td>
+          <td>
+            <button class="btn btn-primary edit-btn" data-value="{{i._id}}" data-toggle="modal" data-target="#editModal">Edit</button>
+            <button class="btn btn-danger delete-btn" data-value="{{i._id}}" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
+          </td>
     </tr>
     {% endfor %}
 
@@ -139,7 +145,7 @@
 </div>
 
 <!--Modal design starts here-->
-<!--  My Modal   -->
+<!--  Edit Modal   -->
 
 <div class="modal fade" id="editModal" role="dialog">
     <div class="modal-dialog">
@@ -152,7 +158,7 @@
         </div>
         <div class="modal-body">
 
-          <form method="post" action="modify">
+          <form method="post" action="update">
             <label for="id">ID</label><br>
             <input type="text" name="id" id="id">
             <br><br>
@@ -188,43 +194,96 @@
   </div>
 
 
+
+
+<!--Delete Modal-->
+
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Details</h4>
+        </div>
+<form action="delete" method="post">
+        <div class="modal-body">
+
+            <p>Do you want to delete the data with the name <strong><span id="delete-name" ></span></strong> and the ID <strong><span id="delete-id"></span></strong></p>
+            <input type="submit" name="deleteButton" id="deleteButton">
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 </body>
 
 <script>
 
+<!--Edit Functionality-->
+$(document).ready(function() {
+  $('.edit-btn').on('click', function(e) {
+      var userId = $(this).attr('data-value');
+      console.log(userId)
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.edit-btn').forEach(function(button) {
-      button.addEventListener('click', function() {
-          // Get the current row
-          var row = this.closest('tr');
-
-          // Get data from the row's <td> elements
-          var id = row.cells[0].textContent;
-          var name = row.cells[1].textContent;
-          var age = row.cells[2].textContent;
-          var gender = row.cells[3].textContent;
-          var city = row.cells[4].textContent;
-          var state = row.cells[5].textContent;
-          var country = row.cells[6].textContent;
-
-          // Now you can use these variables to populate the modal fields or for any other purpose
-          console.log("Name: " + name);
-          console.log("Age: " + age);
-          console.log("Gender: " + gender);
-
-          // Example of populating modal fields (assuming you have these input fields in your modal)
-          document.querySelector('#editModal #id').value = id;
-          document.querySelector('#editModal #name').value = name;
-          document.querySelector('#editModal #age').value = age;
-          document.querySelector('#editModal #gender').value = gender;
-          document.querySelector('#editModal #city').value = city;
-          document.querySelector('#editModal #state').value = state;
-          document.querySelector('#editModal #country').value = country;
+      $.ajax({
+          url: '/get_user',  // URL to get user data
+          type: 'POST',
+          data: { Id: userId },
+          success: function(data) {
+              // Populate the modal fields with the data returned from the
+              console.log(data)
+              $('#id').val(data._id);
+              $('#name').val(data.name);
+              $('#age').val(data.age);
+              $('#gender').val(data.gender);
+              $('#city').val(data.city);
+              $('#state').val(data.state);
+              $('#country').val(data.country);
+          },
+          error: function(xhr, status, error) {
+              console.error('Error fetching user data:', error);
+          }
       });
   });
 });
 
+
+
+<!--Delete Functionality-->
+$(document).ready(function() {
+  $('.delete-btn').on('click', function(e) {
+      var userId = $(this).attr('data-value');
+      console.log(userId)
+
+      $.ajax({
+          url: '/get_user',  // URL to get user data
+          type: 'POST',
+          data: { Id: userId },
+          success: function(data) {
+              // Populate the modal fields with the data returned from the Flask
+              console.log(data)
+              $('#delete-id').text(data._id);
+              $('#delete-name').text(data.name);
+          },
+          error: function(xhr, status, error) {
+              console.error('Error fetching user data:', error);
+          }
+      });
+  });
+});
 
 </script>
 </html>
