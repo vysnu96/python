@@ -14,9 +14,11 @@ collection = database['details']
 
 @app.route('/')
 def default():
-    users = collection.find({})
-    print(users)
-    return render_template('new-home.html', result=users)
+    if collection.count_documents({}) > 0:
+        users = collection.find({})
+        return render_template('new-home.html', result=users)
+    else:
+        return render_template('new-home.html', message="Collection is empty")
 
 @app.route('/add_user',  methods=['GET'])
 def add_user():
@@ -46,7 +48,6 @@ def write():
 @app.route('/get_user', methods=['POST','GET'])
 def get_user():
     id = request.form.get('Id')
-    print(f"received ID:{id}")
     user = collection.find_one({"_id":ObjectId(id)})
     user["_id"] = str(user["_id"])
     return user
@@ -65,18 +66,33 @@ def update():
     collection.update_one({"_id":ObjectId(obj_id)}, update_doc)
     return redirect('/')
 
+@app.route('/delete', methods=['POST', 'GET'])
+def delete():
+    obj_id = request.form.get("passing-id")
+    print(obj_id)
+    collection.delete_one({"_id":ObjectId(obj_id)})
+    return redirect('/')
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
     search_name = request.form.get("query")
-    output_name = collection.count_documents({"name": search_name}) > 0
-    if output_name:
-        result = collection.find_one({"name": search_name}, {"_id": 0})
-        print(result)
-        return render_template('search.html', result=result)
-        # return result
-    else:
-        return "No matches found"
+    all_names = collection.find({}, {"name":1,"_id":0})
+    for i in all_names:
+        if search_name in i["name"]:
+            result = collection.find_one({"name": i["name"]}, {"_id": 0})
+            print(result)
+            return render_template('search.html', result=result)
+
+    return "No matches found"
+
+    # search_name = request.form.get("query")
+    # output_name = collection.count_documents({"name": search_name}) > 0
+    # if output_name:
+    #     result = collection.find_one({"name": search_name}, {"_id": 0})
+    #     print(result)
+    #     return render_template('search.html', result=result)
+    # else:
+    #     return "No matches found"
 
 
 if __name__ == "__main__":
