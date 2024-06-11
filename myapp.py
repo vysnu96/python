@@ -16,13 +16,13 @@ collection = database['details']
 def default():
     if collection.count_documents({}) > 0:
         users = collection.find({})
-        return render_template('new-home.html', result=users)
+        return render_template('new-home.html', result=users, params=None)
     else:
         return render_template('new-home.html', message="Collection is empty")
 
 @app.route('/add_user',  methods=['GET'])
 def add_user():
-    return render_template('add-user.html')
+    return render_template('test.html')
 
 @app.route('/write', methods=['POST'])
 def write():
@@ -31,7 +31,7 @@ def write():
     search_entered_name = collection.count_documents({"name": entered_name})
     print(search_entered_name)
     if search_entered_name > 0:
-        return f"{entered_name} already exists in database"
+        return render_template('test.html', value="Name already exists")
     else:
         new_dict["name"] = request.form.get("name")
         new_dict["age"] = request.form.get("age")
@@ -43,7 +43,7 @@ def write():
         collection.insert_one(new_dict)
         is_entered = collection.count_documents({"name": entered_name})
         if is_entered > 0:
-            return render_template('add-user.html', value="Data inserted successfully")
+            return render_template('test.html', value="Data inserted successfully")
 
 @app.route('/get_user', methods=['POST','GET'])
 def get_user():
@@ -94,6 +94,24 @@ def search():
     # else:
     #     return "No matches found"
 
+@app.route('/new_search', methods=['POST'])
+def new_search():
+    search_params = {}
+    name = request.form.get("s-name")
+    age = request.form.get("s-age")
+    gender = request.form.get("s-gender")
+    country = request.form.get("s-country")
+    if name:
+        search_params["name"] = name
+    if age:
+        search_params["age"] = age
+    if gender:
+        search_params["gender"] = gender
+    if country:
+        search_params["country"] = country
+
+    search_result = collection.find(search_params)
+    return render_template('new-home.html', result=search_result, params=search_params)
 
 if __name__ == "__main__":
     app.run(debug=True)
