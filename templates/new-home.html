@@ -3,6 +3,8 @@
 <head>
   <title>Home</title>
   <meta charset="utf-8">
+<!--    Home icon script    -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -101,19 +103,46 @@
 }
 
 
+        .navbar {
+            padding: 10px;
+            text-align: right;
+        }
+
+        .to-home {
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            background-color: transparent; /* Transparent background */
+            color: black; /* Icon color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: none; /* Remove box shadow */
+        }
+
 
 </style>
 <body>
 
+<!--Home Button-->
+<div class="navbar">
+    <button class="to-home" onclick="document.location='/'">
+        <i class="fas fa-home"></i>
+    </button>
+</div>
+
 <!--Search functionality-->
-<!--<div class="container mt-3">-->
+<div class="container mt-3">
+<!--
   <div class="search-container">
     <form method="post" action="search">
         <input type="text" placeholder="Search..." class="search-bar" name="query">
         <button type="submit" class="search-button">Search </button>
     </form>
-</div>
-
+  </div>
+-->
 <!--Page Title-->
 <h2>User Details</h2>
 
@@ -124,26 +153,39 @@
     </form>
   </div>
   <br>
+<!--    <p>{{params}}</p>-->
 
 <!--    Search Table    -->
-    <div class="container">
-        <div class="table-container">
-            <table>
-                <thead>
-                  <tr >
-                    <th><input type="text" placeholder="ID"></th>
-                    <th><input type="text" placeholder="Name"></th>
-                    <th><input type="text" placeholder="Age"></th>
-                    <th><input type="text" placeholder="Gender"></th>
-                    <th><input type="text" placeholder="City"></th>
-                    <th><input type="text" placeholder="State"></th>
-                    <th><input type="text" placeholder="Country"></th>
+<form method="post" action="new_search">
+<table class="table table-hover table-borderless">
+    <thead>
+      <tr >
+<!--        <th><input type="text" placeholder="ID"></th>-->
+        <th><input type="text" placeholder="Name" name="s-name" value="{{params.name}}"></th>
+        <th><input type="text" placeholder="Age" name="s-age" value="{{params.age}}"></th>
+        <th>
+            <select id="s-gender" name="s-gender">
+            <option value="">Select</option>
+            <option value="male" {% if params.gender == "male" %}selected{% endif %}>Male</option>
+            <option value="female" {% if params.gender == "female" %}selected{% endif %}>Female</option>
+            </select>
+        </th>
+        <th>
+            <select id="s-country" name="s-country">
+            <option value="">Select</option>
+            <option value="Indian" {% if params.country == "Indian" %}selected{% endif %}>Indian</option>
+            <option value="NRI" {% if params.country == "NRI" %}selected{% endif %}>NRI</option>
+            </select>
+        </th>
+        <th>
+            <button type="submit">Search</button>
+        </th>
 
-                  </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
+      </tr>
+    </thead>
+</table>
+</form>
+
 <!--    Search table ends here-->
 
 <!--User Details Table-->
@@ -188,7 +230,7 @@
 
     </tbody>
   </table>
-<!--</div>-->
+</div>
 
 <!--Modal design starts here-->
 <!--  Edit Modal   -->
