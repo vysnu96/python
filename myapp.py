@@ -1,13 +1,19 @@
 import json
+import os
 
+import logging
+from logging.handlers import RotatingFileHandler
 from bson import ObjectId
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from pymongo import MongoClient
 
 app = Flask(__name__)
 
-client = MongoClient(
-    "mongodb+srv://vishnu:ShYsODCxx7GxaFUj@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
+username = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
+url = os.environ.get("URL")
+# client = MongoClient(f"mongodb://{username}:{password}@{url}:27017/?authSource=admin")
+client = MongoClient("mongodb+srv://vishnu:ShYsODCxx7GxaFUj@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
 database = client['users']
 collection = database['details']
 
@@ -16,13 +22,13 @@ collection = database['details']
 def default():
     if collection.count_documents({}) > 0:
         users = collection.find({})
-        return render_template('new-home.html', result=users, params=None)
+        return render_template('home.html', result=users, params=None)
     else:
-        return render_template('new-home.html', message="Collection is empty")
+        return render_template('home.html', message="Collection is empty")
 
 @app.route('/add_user',  methods=['GET'])
 def add_user():
-    return render_template('test.html')
+    return render_template('add_user.html')
 
 @app.route('/write', methods=['POST'])
 def write():
@@ -31,7 +37,7 @@ def write():
     search_entered_name = collection.count_documents({"name": entered_name})
     print(search_entered_name)
     if search_entered_name > 0:
-        return render_template('test.html', value="Name already exists")
+        return render_template('add_user.html', value="Name already exists")
     else:
         new_dict["name"] = request.form.get("name")
         new_dict["age"] = request.form.get("age")
@@ -43,7 +49,7 @@ def write():
         collection.insert_one(new_dict)
         is_entered = collection.count_documents({"name": entered_name})
         if is_entered > 0:
-            return render_template('test.html', value="Data inserted successfully")
+            return render_template('add_user.html', value="Data inserted successfully")
 
 @app.route('/get_user', methods=['POST','GET'])
 def get_user():
@@ -111,7 +117,7 @@ def new_search():
         search_params["country"] = country
 
     search_result = collection.find(search_params)
-    return render_template('new-home.html', result=search_result, params=search_params)
+    return render_template('home.html', result=search_result, params=search_params)
 
 if __name__ == "__main__":
     app.run(debug=True)
