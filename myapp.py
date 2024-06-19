@@ -9,11 +9,12 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
+# Below three variables are used for configure the credentials using environment variables
 username = os.environ.get("USERNAME")
 password = os.environ.get("PASSWORD")
 url = os.environ.get("URL")
 # client = MongoClient(f"mongodb://{username}:{password}@{url}:27017/?authSource=admin")
-client = MongoClient("mongodb+srv://vishnu:ShYsODCxx7GxaFUj@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
+client = MongoClient("mongodb+srv://<username>:<password>@<URL>/?retryWrites=true&w=majority&appName=targeryen")
 database = client['users']
 collection = database['details']
 
