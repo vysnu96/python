@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery toast plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <title>Enter Details</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #42aaf5, #ff8c8c);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            padding: 10px;
+            text-align: right;
+        }
+
+        .to-home {
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            background-color: transparent; /* Transparent background */
+            color: black; /* Icon color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: none; /* Remove box shadow */
+        }
+
+        .details-container {
+            text-align: center;
+            margin-top: 50px;
+            min-height: calc(100vh - 2px);
+            padding-bottom: 20px;
+
+        }
+
+.form-control {
+    width: 30%;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+input[type="radio"] {
+    transform: scale(1.7);
+    margin-right: 8px;
+}
+
+
+        #age::-webkit-inner-spin-button,
+        #age::-webkit-outer-spin-button {
+            height: 30px;
+        }
+
+        #submitButton, #toHome {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+
+        }
+
+        #male, #female, #indian, #nri {
+            transform: scale(1.5);
+            margin-right: 5px;
+        }
+
+        input:focus {
+            outline: 1px solid #59554a;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <button class="to-home" onclick="document.location='/home'" >
+        <i class="fas fa-home"></i>
+    </button>
+</div>
+
+<div class="details-container">
+    <form action="write" method="post" id="myForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" autofocus="autofocus" required class="form-control"/><br>
+
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required class="form-control"/><br>
+
+        <label for="pwd">Password:</label><br>
+        <input type="text" id="pwd" name="pwd" required class="form-control"/><br>
+
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" required class="form-control"/><br><br>
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br><br>
+
+        <label for="city">City:</label><br>
+        <select id="city" name="city" required class="form-control">
+            <option>CHENNAI</option>
+            <option>DELHI</option>
+            <option>HYDERABAD</option>
+            <option>BANGALORE</option>
+            <option>MUMBAI</option>
+            <option>KOLKATA</option>
+            <option>PUNE</option>
+        </select><br>
+
+        <label for="state">State:</label><br>
+        <select id="state" name="state" required class="form-control">
+            <option>TAMIL NADU</option>
+            <option>ANDHRA PRADESH</option>
+            <option value="AR">ARUNACHAL PRADESH</option>
+            <option value="AS">ASSAM</option>
+            <option value="BR">BIHAR</option>
+            <option value="CG">CHHATTISGARH</option>
+            <option value="GA">GOA</option>
+            <option value="GJ">GUJARAT</option>
+            <option value="HR">HARYANA</option>
+            <option value="HP">HIMACHAL PRADESH</option>
+            <option value="MH">MAHARASHTRA</option>
+        </select><br><br>
+
+        <label>Country:</label>
+        <input type="radio" id="indian" name="country" value="Indian" required>
+        <label for="indian">Indian</label>
+        <input type="radio" id="nri" name="country" value="NRI" required>
+        <label for="nri">NRI</label><br><br>
+
+        <input type="submit" name="btn" id="submitButton"/>
+
+        <input type="hidden" value="{{value}}">
+
+    </form>
+</div>
+
+<!--<div align="center">{{value}}</div>-->
+
+<script>
+    // Get the form element
+    const form = document.getElementById('myForm');
+
+    // Add an event listener to the form
+    form.addEventListener('keydown', function (event) {
+        // Check if the pressed key is Enter
+        if (event.key === 'Enter') {
+            // Prevent the default action
+            event.preventDefault();
+            // Trigger the submit button click
+            document.getElementById('submitButton').click();
+        }
+    });
+
+<!--    Handle flask response-->
+
+    $(document).ready(function(){
+            var hiddenValue = $('input[type="hidden"]').val();
+            // Function to show toast popup
+            function showToast(message, type) {
+                toastr.options = {
+                    "closeButton": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "bgColor": '#9EC600',
+                    "textColor": 'black'
+                };
+                toastr[type](message);
+            }
+
+            var flaskResponse = "{{value}}";
+            var toastType = "success";
+            if (flaskResponse == "Data inserted successfully")
+            {
+                showToast(flaskResponse, toastType);
+            }
+            else if (flaskResponse == "Name already exists")
+            {
+                showToast(flaskResponse, "error");
+            }
+        });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gameplay</title>
+</head>
+
+
+<style>
+
+.navbar
+    {
+        padding: 10px;
+        text-align: right;
+    }
+
+.to-home
+    {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    background-color: transparent; /* Transparent background */
+    color: black; /* Icon color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: none; /* Remove box shadow */
+    }
+
+</style>
+
+<body>
+
+<div style="text-align: center;">
+    {% for i in range(lives) %}
+        {% if lives != 0 %}
+            &#128151;
+        {% else %}
+            <!--Do nothing-->
+        {% endif %}
+    {% endfor %}
+</div>
+<br><br>
+<div class="movie_name">
+    {{ l }}
+</div>
+<br><br>
+
+<div>
+    {%if warn|length > 0 %}
+        {{ warn }} <p>not present &#128531;. You lost a life &#128148;</p>
+    {% endif %}
+</div>
+<br>
+
+<div>Used letters: {{ guessed }}</div>
+
+<div class="guess_name">
+    <form class="guess_form" action="play" method="post">
+        <input type="text" name="movie_letter" placeholder="Guess" autofocus="autofocus">
+        <input type="submit">
+    </form>
+</div>
+
+
+<br>
+<form action="reset" method="post">
+        <input type="hidden" name="button" value="clicked">
+        <button type="submit">Reset</button>
+</form>
+
+<div style="align:center">
+    {{ won }}
+</div>
+
+</body>
+</html>

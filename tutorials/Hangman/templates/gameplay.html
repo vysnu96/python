@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Gameplay</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            padding: 10px;
+            text-align: right;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: none;
+        }
+
+        .lives {
+            text-align: right;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .movie_name {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .guess_form {
+            text-align: center;
+        }
+
+        .guess_form input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            outline: none;
+            margin-right: 10px;
+        }
+
+        .guess_form input[type="submit"], button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .guess_form input[type="submit"]:hover, button:hover {
+            background-color: #007BFF;
+            color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .guess_form input[type="submit"]:focus, button:focus {
+            outline: none;
+        }
+
+        .reset_button {
+            margin-top: 10px;
+        }
+
+        .game-image {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .warn, .guessed, .won {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!--Home Button-->
+<div class="navbar">
+    <button class="to-home" onclick="document.location='/'">
+        <i class="fas fa-home"></i>
+    </button>
+</div>
+
+<!--#Top nav bar showing lives count-->
+    <div class="lives">
+        {% for i in range(lives) %}
+            &#128151;
+        {% endfor %}
+    </div>
+
+<!--#Images for gaming-->
+    <div class="game-image">
+        <!-- Placeholder for game image -->
+        <img src="./static/images/{{ game_image_url }}.png" alt="Game Image" width="200" height="200">
+    </div>
+
+<!--#Display the movie name with only guessed letters-->
+    <div class="movie_name">
+        {{ l }}
+    </div>
+
+<!--#Showing message if a letter is already entered-->
+    {% if msg|length > 0 %}
+    <div class="warn">
+        {{ msg }}
+    </div>
+    {% endif %}
+
+<!--#Showing message if a wrong letter is entered-->
+    {% if warn|length > 0 %}
+    <div class="warn">
+        {{ warn }} not present &#128531;. You lost a life &#128148;
+    </div>
+    {% endif %}
+
+<!--#Showing a list of entered letters-->
+{% if guessed|length > 0 %}
+    <div class="guessed">
+        Entered letters: {{ guessed }}
+    </div>
+    <br>
+{% endif %}
+
+{% if lives == 2 %}
+<div>
+    <form class="guess_form" action="clue" method="post">
+        <input type="submit" value="Get Clue" id="myButton" onclick="hideButton()">
+    </form>
+</div>
+{% endif %}
+<br>
+
+{% if clue|length > 0 %}
+<div>
+    Actor is {{ clue }}
+</div>
+{% endif %}
+
+<!--#Submit form for entering letters-->
+    <div class="guess_name">
+        <form class="guess_form" action="play" method="post">
+            <input type="text" name="movie_letter" placeholder="Guess" autofocus="autofocus"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+<!--#Button to restart or reset the game-->
+    <div class="reset_button">
+        <form action="reset" method="post">
+            <input type="hidden" name="button" value="clicked">
+            <button type="submit">Play Again</button>
+        </form>
+    </div>
+
+</body>
+
+<script>
+    function hideButton() {
+            var button = document.getElementById('myButton');
+            if (button) {
+                console.log("Button found. Hiding button.");
+                button.classList.add('hidden');
+            } else {
+                console.log("Button not found.");
+            }
+        }
+</script>
+
+</html>

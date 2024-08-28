@@ -1,0 +1,124 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+</head>
+
+<style>
+
+.navbar
+    {
+        padding: 10px;
+        text-align: right;
+    }
+
+.to-home
+    {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    background-color: transparent; /* Transparent background */
+    color: black; /* Icon color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: none; /* Remove box shadow */
+    }
+
+</style>
+
+<body>
+<div class="navbar">
+    <button class="to-home" onclick="document.location='/'">
+        <i class="fas fa-home"></i>
+    </button>
+</div>
+<br><br>
+<form action="start" method="post">
+        <input type="hidden" name="button" value="clicked">
+        <button type="submit">Start Game!</button>
+</form>
+
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+<!--    <link rel="stylesheet" href="C:\Users\vishnuvardhan.j.DC\Documents\python\tutorials\Hangman\templates\styles.css">-->
+</head>
+
+<style>
+    /* Ensure the background image covers the entire screen */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('./static/images/h2.jpg'); /* Replace with your background image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the container */
+.container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Style the message */
+.message {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style the start button with gradient */
+.start-button {
+    font-size: 18px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6b6b, #f06595);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for the start button */
+.start-button:hover {
+    background: linear-gradient(45deg, #f06595, #ff6b6b);
+    color: #fff;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+</style>
+
+<body>
+    <div class="container">
+        <div class="message">
+            Welcome to Hangman! Press the button to start the game.
+        </div>
+        <form action="start" method="post">
+            <input type="hidden" name="button" value="clicked">
+            <button type="submit" class="start-button">Start Game!</button>
+        </form>
+    </div>
+</body>
+</html>
