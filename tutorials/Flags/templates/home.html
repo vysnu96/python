@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Quiz</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <h1>Flag Quiz</h1>
+    </div>
+
+    <div class="button-container">
+        <form action="/continent/africa" method="post" style="display: inline;">
+            <button type="submit" class="continent-button">Africa</button>
+        </form>
+        <form action="/continent/asia" method="post" style="display: inline;">
+            <button type="submit" class="continent-button">Asia</button>
+        </form>
+        <form action="/continent/europe" method="post" style="display: inline;">
+            <button type="submit" class="continent-button">Europe</button>
+        </form>
+        <form action="/continent/north_america" method="post" style="display: inline;">
+            <button type="submit" class="continent-button">North America</button>
+        </form>
+        <form action="/continent/south_america" method="post" style="display: inline;">
+            <button type="submit" class="continent-button">South America</button>
+        </form>
+        <form action="/continent/oceania" method="post" style="display: inline;">
+            <button type="submit" class="continent-button">Oceania</button>
+        </form>
+    </div>
+
+</body>
+</html>
