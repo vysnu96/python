@@ -13,7 +13,7 @@
 <!--        </div>-->
         <h1>Asia</h1>
     </div>
-    <div style="position: relative; font-size: 24px;">{{ total }}/{{ remaining }}</div>
+    <div style="position: relative; font-size: 24px;">{{ remaining }}/{{ total }}</div>
     <div class="content">
         <div class="image-box">
             <img src="{{ url_for('static', filename='images/' + asia_flag + '.png') }}" alt="Quiz Image">
@@ -22,15 +22,16 @@
 
         <div class="options-container">
             <!-- Form for each button -->
-            <form action="{{ url_for('process_answer') }}" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="Option 1">Option 1</button>
+            <form action="process_answer" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="Option1">{{Option1}}</button>
             </form><br>
-            <form action="{{ url_for('process_answer') }}" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="Option 2">Option 2</button>
+            <form action="process_answer" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="Option2">{{Option2}}</button>
             </form><br>
-            <form action="{{ url_for('process_answer') }}" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="Option 3">Option 3</button>
+            <form action="process_answer" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="Option3">{{Option3}}</button>
             </form>
+
         </div>
     </div>
 </body>
