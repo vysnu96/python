@@ -19,12 +19,18 @@ continents = [
 def home():
     return render_template('home.html')
 
-@app.route('/initialize', methods=['POST', 'GET'])
+# @app.route('/initialize', methods=['POST', 'GET'])
 def initialize():
-    country = request.form.get('continent')
-    country_temp = random.sample(f"{country}_code", len(f"{country}_code"))
-    print(country_temp)
-    return render_template(f"{country}.html", asia_flag=country_temp[1].lower())
+    continent = request.form.get('continent')
+    print(continent)
+    if continent in globals():
+        temp = globals()[continent]
+        random.shuffle(temp)
+    print(temp)
+    number_of_countries = len(temp)
+    template_name = f"{continent}.html"
+    return temp, number_of_countries, template_name
+#    return render_template(template_name, asia_flag=temp[1].lower(), total=number_of_countries)
 
 def process_answer():
     option1 = request.form.get("Option1")
@@ -33,12 +39,10 @@ def process_answer():
     print(option1, option2, option3)
     return render_template('asia.html')
 
-@app.route('/continent/asia', methods=['POST', 'GET'])
+@app.route('/asia', methods=['POST', 'GET'])
 def asia_route():
-    asia_temp = random.sample(asia_code, len(asia_code))
-    numberOfCountries = len(asia_temp)
-    choosen_country = asia_temp[1]
-    return render_template('asia.html', asia_flag=choosen_country.lower(), total=numberOfCountries, Option1=asia_dict["choosen_country"], Option2=asia_dict["asia_temp[2]"], Option3=asia_dict["asia_temp[3]"])
+    temp, number_of_countries, template_name = initialize()
+    return render_template(template_name, asia_flag=temp[1].lower(), total=number_of_countries)
 
 
 @app.route('/continent/europe', methods=['POST', 'GET'])
