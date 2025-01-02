@@ -64,7 +64,7 @@
             padding: 10px 20px;
             font-size: 1em;
             color: white;
-            background-color: #046485;
+            background-color: #b5b5b3;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -75,3 +75,31 @@
             #background-color: #0056b3;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
+
+/* Home Button */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+
+    border: 1px solid transparent;
+    border-radius: 5px; /* Rounded corners */
+    transition: all 0.5s ease; /* Smooth hover effects */
+    cursor: pointer;
+}
+
+/* Hover effect */
+.btn:hover {
+    background-color: #545353; /* Darker blue on hover */
+    text-decoration: none; /* Ensure no underline appears */
+}
+
+/* Active effect */
+.btn:active {
+    background-color: #004080; /* Even darker blue when clicked */
+    transform: scale(0.95); /* Slight button press effect */
+}

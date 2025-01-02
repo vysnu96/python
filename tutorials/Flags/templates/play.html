@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asia</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='asia.css') }}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="home-icon">
+            <a href="/" class="btn">Home</a>
+        </div>
+        <h1>Asia</h1>
+    </div>
+
+    <div style="position: relative; font-size: 24px;">{{ remaining }}/{{ total }}</div>
+
+    <div class="content">
+        <div class="image-box">
+            <img src="{{ url_for('static', filename='images/' + flag_image + '.png') }}" alt="Quiz Image">
+        </div>
+
+
+        <div class="options-container">
+            <!-- Form for each button -->
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="{{option1}}"{% if condition %}style="background-color:#02b573;"disabled{% endif %}>{{option1}}</button>
+            </form><br>
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="{{option2}}"{% if condition %}disabled{% endif %}>{{option2}}</button>
+            </form><br>
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %}>{{option3}}</button>
+            </form>
+
+        </div>
+
+        <div>
+            <form action="nxt" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="answer" value="{{option3}}" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Next</button>
+            </form>
+        </div>
+
+<!--        <div>-->
+<!--            <p>{{isItCorrect}}</p>-->
+<!--        </div>-->
+
+    </div>
+</body>
+</html>
