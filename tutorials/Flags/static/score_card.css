@@ -1,0 +1,70 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Stack header and container vertically */
+    align-items: center; /* Center the content horizontally */
+    height: 100vh; /* Full viewport height */
+    background-color: #f4f4f4; /* Light gray background */
+    font-family: Arial, sans-serif; /* Default font */
+}
+
+/* Header styling */
+.header {
+    width: 100%; /* Full width */
+    display: flex; /* Flexbox for row layout */
+    #justify-content: space-between; /* Space between Home and heading */
+    align-items: center; /* Vertically center items */
+    padding: 10px 20px; /* Padding for spacing */
+    background-color: #8f9693; /* Blue background */
+    color: #fff; /* White text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for header */
+}
+
+/* Home icon button styling */
+.home-icon a {
+    text-decoration: none; /* Remove underline from link */
+    color: #fff; /* White text color */
+    background-color: #8f9693; /* Darker blue background */
+    padding: 10px 15px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Standard font size */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.home-icon a:hover {
+    background-color: #004085; /* Darker shade on hover */
+}
+
+/* Header title styling */
+.header h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 1.8rem; /* Larger font size */
+}
+
+/* Container styling */
+.container {
+    display: flex; /* Flexbox for side-by-side layout */
+    align-items: center; /* Vertically center image and text */
+    gap: 20px; /* Space between image and paragraph */
+    margin-top: 40px; /* Space between header and container */
+    text-align: right; /* Align text to the right */
+}
+
+/* Image styling */
+.container img {
+    max-width: 200px; /* Limit the image width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Paragraph styling */
+.container p {
+    font-size: 1.4rem; /* Larger font size for emphasis */
+    font-weight: bold; /* Bold text */
+    margin: 0; /* Remove default margin */
+    color: #333; /* Dark text color */
+}

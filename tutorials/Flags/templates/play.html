@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asia</title>
+    <title>{{continent}}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='asia.css') }}">
 </head>
 
 <body>
     <div class="header">
+<!--        Display the Home Icon-->
         <div class="home-icon">
             <a href="/" class="btn">Home</a>
         </div>
-        <h1>Asia</h1>
+<!--        Display the selected continent name-->
+        <h1>{{continent}}</h1>
     </div>
 
+<!--Display the number of country we're in / number of countries in the continent-->
     <div style="position: relative; font-size: 24px;">{{ remaining }}/{{ total }}</div>
 
+    <!--Display score-->
+    <div class="score">Score: {{ score }}</div>
+
+<!--    Main content of the game with flag image and options-->
     <div class="content">
+
+<!--        Block showing the flag image -->
         <div class="image-box">
             <img src="{{ url_for('static', filename='images/' + flag_image + '.png') }}" alt="Quiz Image">
         </div>
@@ -36,12 +45,21 @@
             </form>
 
         </div>
-
+        {% if remaining < total %}
         <div>
             <form action="nxt" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option3}}" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Next</button>
+                <button class="option-button" type="submit" name="next" value="{{option3}}" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Next</button>
             </form>
         </div>
+        {% endif %}
+
+        {% if remaining == total %}
+        <div>
+            <form action="finish" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="finish" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Finish</button>
+            </form>
+        </div>
+        {% endif %}
 
 <!--        <div>-->
 <!--            <p>{{isItCorrect}}</p>-->

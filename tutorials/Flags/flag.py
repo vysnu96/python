@@ -15,77 +15,99 @@ continents = [
     "southAmerica",
     "oceania"
 ]
-
-global selected_continent
+# Declaring global variables to use in any function
+global selected_continent, continentName
 global number_of_countries
 global question_no
 global random_values
 global counter
+global score
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
 
+# This function will be called whenever a new game is started
 def initialize():
-    global selected_continent
+    """ Since using global variables in python, it has be called again or mentioned again.Directly modifying the
+    variable throws an error """
+
+    global selected_continent, continentName
     global number_of_countries
     global question_no
     global counter
+    global score
     selected_continent = None
     number_of_countries = 0
     question_no = 1
     counter = 0
+    score = 0
 
     continent = request.form.get('continent')
+    continentName = continent
     if continent in globals():
         selected_continent = globals()[continent]
         random.shuffle(selected_continent)
     number_of_countries = len(selected_continent)
 
     print("from initialize", selected_continent)
+    print(continentName)
+
 
 @app.route('/start', methods=['POST', 'GET'])
 def start():
     initialize()
-    global random_values
+    global random_values, score
     random_values = random.sample(selected_continent, 2)
     return render_template('play.html', flag_image=selected_continent[counter],
                            total=number_of_countries,
                            remaining=question_no, option1=selected_continent[counter],
                            option2=random_values[0],
-                           option3=random_values[1], condition=False)
+                           option3=random_values[1], condition=False, score=score, continent=continentName.upper())
 
 
 @app.route('/play', methods=['POST', 'GET'])
 def play():
     clicked = request.form.get("answer")
-    if clicked == selected_continent[0]:
+    global score
+    if clicked.strip().lower() == selected_continent[counter].strip().lower():
+        score += 1
+        print("Score:", score)
+        print("If from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=selected_continent[counter],
                                option2=random_values[0],
-                               option3=random_values[1], condition=True)
+                               option3=random_values[1], condition=True, score=score, continent=continentName.upper())
     else:
+        print("Else from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=selected_continent[counter],
                                option2=random_values[0],
-                               option3=random_values[1], condition=True)
+                               option3=random_values[1], condition=True, score=score, continent=continentName.upper())
 
 
 @app.route('/nxt', methods=['POST', 'GET'])
 def nxt():
-    global question_no, selected_continent, counter
+    global question_no, selected_continent, counter, score
     question_no += 1
     counter += 1
-    print("from nxt", selected_continent)
+    print("counter", counter)
     global random_values
     random_values = random.sample(selected_continent, 2)
     return render_template('play.html', flag_image=selected_continent[counter],
                            total=number_of_countries,
                            remaining=question_no, option1=selected_continent[counter],
                            option2=random_values[0],
-                           option3=random_values[1], condition=False)
+                           option3=random_values[1], condition=False, score=score, continent=continentName.upper())
+
+
+@app.route('/finish', methods=['POST', 'GET'])
+def finish():
+    return render_template('score_card.html', continent=continentName, score=score, total=number_of_countries, continent_image=continentName)
 
 
 if __name__ == "__main__":
