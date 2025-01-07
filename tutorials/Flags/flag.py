@@ -22,10 +22,13 @@ global question_no
 global random_values
 global counter
 global score
+global user_choices
+global shuffle
 
 
 @app.route('/')
 def home():
+    reset()
     return render_template('home.html')
 
 
@@ -39,11 +42,11 @@ def initialize():
     global question_no
     global counter
     global score
-    selected_continent = None
-    number_of_countries = 0
+    global user_choices
     question_no = 1
     counter = 0
     score = 0
+    user_choices = []
 
     continent = request.form.get('continent')
     continentName = continent
@@ -55,39 +58,58 @@ def initialize():
     print("from initialize", selected_continent)
     print(continentName)
 
+def reset():
+    global selected_continent, continentName
+    global number_of_countries
+    global question_no
+    global random_values
+    global counter
+    global score
+    selected_continent, continentName = None, None
+    number_of_countries, question_no, counter, score = 0, 0, 0, 0
+
+def random_func(remaining_values):
+    global shuffle
+    random_values = random.sample(remaining_values, 2)
+    shuffle = [selected_continent[counter], random_values[0], random_values[1]]
+    random.shuffle(shuffle)
+
 
 @app.route('/start', methods=['POST', 'GET'])
 def start():
     initialize()
     global random_values, score
-    random_values = random.sample(selected_continent, 2)
+    remaining_values = [country for country in selected_continent if country != selected_continent[counter]]
+    random_func(remaining_values)
     return render_template('play.html', flag_image=selected_continent[counter],
                            total=number_of_countries,
-                           remaining=question_no, option1=selected_continent[counter],
-                           option2=random_values[0],
-                           option3=random_values[1], condition=False, score=score, continent=continentName.upper())
+                           remaining=question_no, option1=shuffle[0],
+                           option2=shuffle[1],
+                           option3=shuffle[2], condition=False, score=score, continent=continentName.upper(), isItCorrect=None)
 
 
 @app.route('/play', methods=['POST', 'GET'])
 def play():
     clicked = request.form.get("answer")
     global score
+    user_choices.append(clicked)
+    # print(clicked, user_choices)
     if clicked.strip().lower() == selected_continent[counter].strip().lower():
         score += 1
-        print("Score:", score)
-        print("If from play called")
+        # print("Score:", score)
+        # print("If from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
-                               remaining=question_no, option1=selected_continent[counter],
-                               option2=random_values[0],
-                               option3=random_values[1], condition=True, score=score, continent=continentName.upper())
+                               remaining=question_no, option1=shuffle[0],
+                               option2=shuffle[1],
+                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=True)
     else:
-        print("Else from play called")
+        # print("Else from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
-                               remaining=question_no, option1=selected_continent[counter],
-                               option2=random_values[0],
-                               option3=random_values[1], condition=True, score=score, continent=continentName.upper())
+                               remaining=question_no, option1=shuffle[0],
+                               option2=shuffle[1],
+                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=False)
 
 
 @app.route('/nxt', methods=['POST', 'GET'])
@@ -95,19 +117,23 @@ def nxt():
     global question_no, selected_continent, counter, score
     question_no += 1
     counter += 1
-    print("counter", counter)
+    # print("counter", counter)
     global random_values
-    random_values = random.sample(selected_continent, 2)
+    remaining_values = [country for country in selected_continent if country != selected_continent[counter]]
+    random_func(remaining_values)
     return render_template('play.html', flag_image=selected_continent[counter],
                            total=number_of_countries,
-                           remaining=question_no, option1=selected_continent[counter],
-                           option2=random_values[0],
-                           option3=random_values[1], condition=False, score=score, continent=continentName.upper())
+                           remaining=question_no, option1=shuffle[0],
+                           option2=shuffle[1],
+                           option3=shuffle[2], condition=False, score=score, continent=continentName.upper(), isItCorrect=None)
 
 
 @app.route('/finish', methods=['POST', 'GET'])
 def finish():
-    return render_template('score_card.html', continent=continentName, score=score, total=number_of_countries, continent_image=continentName)
+    print("your choice",user_choices)
+    print("Answer",selected_continent)
+    return render_template('result.html', continent=continentName.upper(), score=score, total=number_of_countries,
+                           continent_image=continentName, user_choices=user_choices, selected_continent=selected_continent)
 
 
 if __name__ == "__main__":

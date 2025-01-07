@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{continent}}</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='asia.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='play.css') }}">
 </head>
 
 <body>
@@ -15,6 +15,9 @@
         </div>
 <!--        Display the selected continent name-->
         <h1>{{continent}}</h1>
+        <div class="reset">
+            <a href="/finish" class="btn">Reset</a>
+        </div>
     </div>
 
 <!--Display the number of country we're in / number of countries in the continent-->
@@ -31,14 +34,23 @@
             <img src="{{ url_for('static', filename='images/' + flag_image + '.png') }}" alt="Quiz Image">
         </div>
 
+<!--    If the answer is correct-->
+        <div>
+            {%if isItCorrect==True%}
+            <p>&#9989;</p>
+            {%elif isItCorrect==False%}
+            <p>&#10060;</p>
+            {%endif%}
+        </div>
+
 
         <div class="options-container">
             <!-- Form for each button -->
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option1}}"{% if condition %}style="background-color:#02b573;"disabled{% endif %}>{{option1}}</button>
+                <button class="option-button" type="submit" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %}>{{option1}}</button>
             </form><br>
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option2}}"{% if condition %}disabled{% endif %}>{{option2}}</button>
+                <button class="option-button" type="submit" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %}>{{option2}}</button>
             </form><br>
             <form action="play" method="POST" style="display:inline;">
                 <button class="option-button" type="submit" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %}>{{option3}}</button>
@@ -60,10 +72,6 @@
             </form>
         </div>
         {% endif %}
-
-<!--        <div>-->
-<!--            <p>{{isItCorrect}}</p>-->
-<!--        </div>-->
 
     </div>
 </body>

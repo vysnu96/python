@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='result.css') }}">
+  </head>
+  <body>
+    <div class="container">
+        <div class="header-container">
+            <div class="home-button">
+                <a href="/"><button>Home</button></a>
+            </div>
+            <div class="title">{{continent}}</div>
+        </div>
+    
+    
+    <div class="body-container">
+        <div class="left">
+            <img src="{{ url_for('static', filename='images/continent/' + continent_image + '.jpg') }}" alt="Quiz Image">
+        </div>
+        <div class="right">
+            {{continent}}: {{ score }}/{{ total }}
+        </div>
+    </div>
+  </div>
+
+  {% for i in selected_continent %}
+    {% if user_choices[loop.index0] is defined and user_choices[loop.index0] %}
+      <div class="result">
+        <div class="result-img">
+            <img src="{{ url_for('static', filename='images/' + i + '.png') }}" alt="Quiz Image">
+        </div>
+        <div class="result-res">
+            Your response: {{ user_choices[loop.index0] }}<br>
+            Answer: {{ i }}
+        </div>
+      </div>
+    {% endif %}
+  {%endfor%}
+
+  </body>
+</html>

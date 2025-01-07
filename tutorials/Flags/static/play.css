@@ -30,6 +30,20 @@
             font-size: 24px;
         }
 
+        .reset {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        .reset a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            color: #b03352;
+        }
+
         .content {
             margin: 20px;
         }
