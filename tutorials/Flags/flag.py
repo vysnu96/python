@@ -1,7 +1,5 @@
 import random
-
 from flask import Flask, render_template, request, redirect, url_for
-from random import randint
 from countries import africa, asia, europe, oceania, northAmerica, southAmerica, africa_dict, asia_dict, europe_dict, \
     oceania_dict, southAmerica_dict, northAmerica_dict, asia_code, africa_code, europe_code, oceania_code, \
     northAmerica_code, southAmerica_code
@@ -73,7 +71,6 @@ def random_func(remaining_values):
     random_values = random.sample(remaining_values, 2)
     shuffle = [selected_continent[counter], random_values[0], random_values[1]]
     random.shuffle(shuffle)
-
 
 @app.route('/start', methods=['POST', 'GET'])
 def start():
