@@ -47,13 +47,13 @@
         <div class="options-container">
             <!-- Form for each button -->
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %}>{{option1}}</button>
+                <button class="option-button" type="submit" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %} style="background-color:{{opt1}}">{{option1}}</button>
             </form><br>
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %}>{{option2}}</button>
+                <button class="option-button" type="submit" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %} style="background-color:{{opt2}}">{{option2}}</button>
             </form><br>
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %}>{{option3}}</button>
+                <button class="option-button" type="submit" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %} style="background-color:{{opt3}}">{{option3}}</button>
             </form>
 
         </div>

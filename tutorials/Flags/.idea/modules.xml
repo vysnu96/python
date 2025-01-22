@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../../python/tutorials/CRUD App/.idea/CRUD App.iml" filepath="$PROJECT_DIR$/../../../../python/tutorials/CRUD App/.idea/CRUD App.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Flags.iml" filepath="$PROJECT_DIR$/.idea/Flags.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Flags DB/.idea/Flags DB.iml" filepath="$PROJECT_DIR$/../Flags DB/.idea/Flags DB.iml" />
     </modules>
   </component>
 </project>

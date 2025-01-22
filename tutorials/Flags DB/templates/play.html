@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{continent}}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='play.css') }}">
+</head>
+
+<body>
+    <div class="header">
+<!--        Display the Home Icon-->
+        <div class="home-icon">
+            <a href="/" class="btn">Home</a>
+        </div>
+<!--        Display the selected continent name-->
+        <h1>{{continent}}</h1>
+        <div class="reset">
+            <a href="/finish" class="btn">Finish</a>
+        </div>
+    </div>
+
+<!--Display the number of country we're in / number of countries in the continent-->
+    <div style="position: relative; font-size: 24px;">{{ remaining }}/{{ total }}</div>
+
+    <!--Display score-->
+    <div class="score">Score: {{ score }}</div>
+
+<!--    Main content of the game with flag image and options-->
+    <div class="content">
+
+<!--        Block showing the flag image -->
+        <div class="image-box">
+            <img src="{{ url_for('static', filename='images/' + flag_image + '.png') }}" alt="Quiz Image">
+        </div>
+
+<!--    If the answer is correct-->
+        <div>
+            {%if isItCorrect==True%}
+            <p>&#9989;</p>
+            {%elif isItCorrect==False%}
+            <p>&#10060;</p>
+            {%endif%}
+        </div>
+
+
+        <div class="options-container">
+            <!-- Form for each button -->
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" id="option1" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %} style="color:{{}}">{{option1}}</button>
+            </form><br>
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" id="option2" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %} style="color:{{}}">{{option2}}</button>
+            </form><br>
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" id="option3" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %} style="color:{{}}">{{option3}}</button>
+            </form>
+
+        </div>
+        {% if remaining < total %}
+        <div>
+            <form action="nxt" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="next" value="{{option3}}" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Next</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if remaining == total %}
+        <div>
+            <form action="finish" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" name="finish" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Finish</button>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>

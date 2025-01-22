@@ -87,10 +87,32 @@ def start():
 
 @app.route('/play', methods=['POST', 'GET'])
 def play():
+    opt1, opt2, opt3 = None, None, None
     clicked = request.form.get("answer")
     global score
     user_choices.append(clicked)
-    # print(clicked, user_choices)
+    print(clicked)
+    print(shuffle)
+    position = shuffle.index(selected_continent[counter]) + 1
+    print(position)
+    if clicked != selected_continent[counter]:
+        pos = shuffle.index(clicked) + 1
+        if pos == 1:
+            opt1 = "red"
+        elif pos == 2:
+            opt2 = "red"
+        else:
+            opt3 = "red"
+    else:
+        pass
+
+    if position == 1:
+        opt1 = "green"
+    elif position == 2:
+        opt2 = "green"
+    else:
+        opt3 = "green"
+    print(opt1, opt2, opt3)
     if clicked.strip().lower() == selected_continent[counter].strip().lower():
         score += 1
         # print("Score:", score)
@@ -99,14 +121,14 @@ def play():
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],
                                option2=shuffle[1],
-                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=True)
+                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=True, opt1=opt1, opt2=opt2, opt3=opt3)
     else:
         # print("Else from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],
                                option2=shuffle[1],
-                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=False)
+                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=False, opt1=opt1, opt2=opt2, opt3=opt3)
 
 
 @app.route('/nxt', methods=['POST', 'GET'])
