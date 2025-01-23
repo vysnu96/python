@@ -1,0 +1,49 @@
+.body-container{
+position: relative;height: 100vh;
+}
+
+body{
+background: linear-gradient(to right, #FFDAB9, #FFC0CB);
+}
+
+.top-bar{
+position: relative;
+text-align: center;
+color: #654321;
+}
+
+h1 {text-align: center;}
+
+.login{
+position: absolute;
+background-color: #FFFFFF;
+top: 50%;  left: 50%;  transform: translate(-50%, -50%); /* Center the element */
+align: center;
+padding: 10px;margin: 20px;
+width: 400px; height: 300px;
+border-radius: 10px;
+}
+
+h2{
+text-align: center;
+}
+
+input {
+  display: block;
+  margin: 1px auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+
+}
+
+button{
+  display: block;
+  margin: 1px auto;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #D3C5E5;
+  cursor: pointer;
+
+}

@@ -1,0 +1,74 @@
+.top-bar {
+  background-color: #4CAF50;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; /* Align buttons to the right */
+  align-items: center;
+  color: #fff;
+}
+
+.top-bar h1 {
+  margin: 0;
+}
+
+.logout {
+  border: none;
+  border-radius: 50%;
+  padding: 5px 10px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px; /* Add spacing between buttons */
+}
+
+.logout::before {
+  content: "\2022"; /* Bullet point for "on" */
+  display: block;
+  transform: rotate(45deg);
+}
+.profile {
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex; /* Use flexbox for profile button */
+  align-items: center;
+  justify-content: center; /* Center content within the button */
+}
+
+.profile::before {
+  content: "\2605"; /* Star symbol */
+  margin-right: 5px; /* Add spacing between symbol and text */
+}
+
+.body-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 80%; /* Adjust width as needed */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.box {
+  width: 200px; /* Adjust width as needed */
+  height: 200px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.box img {
+  max-width: 200%; /* Ensure images don't exceed box width */
+  height: auto;
+}
+
+body {
+  margin: 0; /* Remove spacing between screen and body */
+  background-color: #fff; /* Complementary color (white) for body */
+}
+
+h1{align:left;}

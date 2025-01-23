@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
 </head>
-<body>
+<style>
+    .parent {
+    margin: 10px;
+    padding: 10px;
+    }
+    .one {
+    position: absolute;
 
+    padding: 5px;
+    margin: 10px;
+    }
+
+    .two {
+    position: relative;
+    padding: 5px;
+    margin: 10px;
+    }
+
+    .three {
+    position: relative;
+    padding: 5px;
+    margin: 10px;
+    }
+
+</style>
+<body>
+<!--<div class="parent" style="background-color: grey">parent-->
+    <div class="one" style="background-color: red">Line one</div>
+    <div class="two" style="background-color: green">Line two</div>
+    <div class="three" style="background-color: blue">Line three</div>
+<!--</div>-->
 </body>
 </html>

@@ -1,0 +1,44 @@
+.container{
+    position: relative;
+    margin: 0px;
+    top: 0px;
+}
+
+.header-container{
+    background-image: linear-gradient(to right,violet,green,indigo);
+    position: relative;
+    margin: 0%;
+    top: 0%;
+    height: 70px;
+}
+
+.home-button button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    padding: 10px;
+    left: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+.title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+}
+
+.body-container{
+    top: 50%;
+    transform: translateY(-50%);
+}

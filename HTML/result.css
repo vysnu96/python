@@ -1,0 +1,68 @@
+.container {
+    position: relative;
+    margin: 0px;
+    top: 0px;
+    height: 100vh; /* Set height for the container */
+    display: flex;
+    flex-direction: column; /* Stack header and body vertically */
+}
+
+.header-container {
+    background-image: linear-gradient(to right, violet, green, indigo);
+    height: 70px;
+    display: flex;
+    align-items: center; /* Vertically center content */
+    position: relative;
+}
+
+.home-button button {
+    margin-left: 10px; /* Replace absolute positioning with margin */
+    background-color: transparent;
+    padding: 10px;
+    left: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 7px 5px 0 rgba(0,0,0,0.19);
+  }
+
+.title {
+    margin: 0 auto; /* Center title horizontally within header */
+    font-size: 25px;
+}
+
+.body-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between; /* Space between the left and right sections */
+    align-items: center; /* Vertically center items */
+    margin: 0 auto; /* Center the container horizontally */
+    width: 80%; /* Adjust the width to leave space on the sides */
+    /*max-width: 1200px;  Optional: Limit the maximum width for larger screens */
+    gap: 2px;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center; /* Ensure content is vertically centered inside */
+    flex: 1; /* Allow the left container to take up available space */
+}
+
+.left img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Optional: Limit image height */
+    /* background-color: bisque; */
+}
+
+.right {
+    font-size: 20px;
+    text-align: left; /* Ensure text is aligned properly */
+    /* background-color: cadetblue; */
+    /* flex: 0; */ /* Right container takes only its content width */
+}
