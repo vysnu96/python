@@ -93,8 +93,8 @@ def play():
     user_choices.append(clicked)
     print(clicked)
     print(shuffle)
-    position = shuffle.index(selected_continent[counter]) + 1
-    print(position)
+
+#If block to mark the option red if the user clicked the wrong option
     if clicked != selected_continent[counter]:
         pos = shuffle.index(clicked) + 1
         if pos == 1:
@@ -106,6 +106,8 @@ def play():
     else:
         pass
 
+    # If block to mark the option as green if the user clicked the right option
+    position = shuffle.index(selected_continent[counter]) + 1
     if position == 1:
         opt1 = "green"
     elif position == 2:
@@ -113,10 +115,9 @@ def play():
     else:
         opt3 = "green"
     print(opt1, opt2, opt3)
+
     if clicked.strip().lower() == selected_continent[counter].strip().lower():
         score += 1
-        # print("Score:", score)
-        # print("If from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],

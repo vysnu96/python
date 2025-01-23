@@ -82,7 +82,17 @@ button:active {
         <form action="/login" method="post">
             <input type="text" name="username" placeholder="Username" autofocus="autofocus" required>
             <input type="password" name="password" placeholder="Password" required>
-
+<!--Display error message-->
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div>
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+<!--            End of error message-->
             <button type="submit">Login</button>
         </form>
         <p><a onclick="document.location='/signup_redirect'">Not a user yet? Sign Up here</a></p>

@@ -35,11 +35,19 @@
         </div>
 
 <!--    If the answer is correct-->
+<!--        <div>-->
+<!--            {%if isItCorrect==True%}-->
+<!--            <p>&#9989;</p>-->
+<!--            {%elif isItCorrect==False%}-->
+<!--            <p>&#10060;</p>-->
+<!--            {%endif%}-->
+<!--        </div>-->
         <div>
             {%if isItCorrect==True%}
-            <p>&#9989;</p>
+                <img src="{{ url_for('static', filename='images/bulb.gif') }}" alt="Glowing bulb" style="width: 50px; height: 50px;"/>
+
             {%elif isItCorrect==False%}
-            <p>&#10060;</p>
+                <img src="{{ url_for('static', filename='images/cat.gif') }}" alt="Pouting cat" style="width: 50px; height: 50px;" />
             {%endif%}
         </div>
 
@@ -47,13 +55,13 @@
         <div class="options-container">
             <!-- Form for each button -->
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" id="option1" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %} style="color:{{}}">{{option1}}</button>
+                <button class="option-button" type="submit" id="option1" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %} style="background-color:{{opt1}}">{{option1}}</button>
             </form><br>
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" id="option2" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %} style="color:{{}}">{{option2}}</button>
+                <button class="option-button" type="submit" id="option2" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %} style="background-color:{{opt2}}">{{option2}}</button>
             </form><br>
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" id="option3" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %} style="color:{{}}">{{option3}}</button>
+                <button class="option-button" type="submit" id="option3" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %} style="background-color:{{opt3}}">{{option3}}</button>
             </form>
 
         </div>
