@@ -1,5 +1,5 @@
 :root {
-  --margin: 200px; /* Default margin value */
+  --margin: calc(25vw); /* Default margin value */
 }
 
 body{
@@ -18,7 +18,7 @@ height: 100vh;
 margin-top: 100px;
   margin-left: auto; /* Center horizontally */
   margin-right: auto; /* Center horizontally */
-  max-width: calc(100% - var(--margin) * 4); /* Adjust width based on margin */
+  max-width: calc(100% - var(--margin) * 2.8); /* Adjust width based on margin */
 #background-color: purple;
 color: white;
 text-align: center;
@@ -54,14 +54,13 @@ padding: 15px;
 }
 
 input{
-padding: 10px;
+padding: 18px;
 border-radius: 10px;
 border: 1px solid;
 display: block;
   display: block; /* Ensure input is a block element */
   width: 80%; /* Match input width with label */
   margin: 0 auto 10px; /* Center horizontally with small space above and below */
-  padding: 10px; /* Add padding for better appearance */
 }
 
 button{
