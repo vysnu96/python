@@ -1,9 +1,9 @@
 .top-bar {
-  background-color: #4CAF50;
+  background-color: #071c2e;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   display: flex;
-  justify-content: space-between; /* Align buttons to the right */
+#  justify-content: space-between; /* Align buttons to the right */
   align-items: center;
   color: #fff;
 }
@@ -12,59 +12,56 @@
   margin: 0;
 }
 
+.menu-item:first-child{margin-right: auto;}
+
 .logout {
   border: none;
-  border-radius: 50%;
-  padding: 5px 10px;
-  background-color: #f44336;
-  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
   cursor: pointer;
-  margin-left: 10px; /* Add spacing between buttons */
+  margin-left: 20px; /* Add spacing between buttons */
+  background: none;
 }
 
-.logout::before {
-  content: "\2022"; /* Bullet point for "on" */
-  display: block;
-  transform: rotate(45deg);
+.logout a {
+color: #fff;
+font-family: 'Helvetica';
+font-size: 20px;
+
 }
+
+.logout:hover{
+background-color: #0d3964;
+}
+
+
 .profile {
-  border: 1px solid #fff;
-  padding: 5px 10px;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
   color: #fff;
   cursor: pointer;
-  display: flex; /* Use flexbox for profile button */
-  align-items: center;
-  justify-content: center; /* Center content within the button */
+  background: none;
 }
 
-.profile::before {
-  content: "\2605"; /* Star symbol */
-  margin-right: 5px; /* Add spacing between symbol and text */
+.profile:hover{
+background-color: #0d3964;
 }
 
-.body-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 80%; /* Adjust width as needed */
-  margin: 0 auto; /* Center the container horizontally */
+.profile a {
+color: #fff;
+font-family: 'Helvetica';
+font-size: 20px;
 }
 
-.box {
-  width: 200px; /* Adjust width as needed */
-  height: 200px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
+.title-bar{
+color:#000;
+background-color: #fff;
+margin: 0px;
+padding: 15px;
+text-align: center;
 }
 
-.box img {
-  max-width: 200%; /* Ensure images don't exceed box width */
-  height: auto;
-}
 
 body {
   margin: 0; /* Remove spacing between screen and body */
@@ -72,3 +69,50 @@ body {
 }
 
 h1{align:left;}
+
+.body-container {
+#  background-color: #0d3964;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+  gap: 20px;
+  padding: 20px; /* Add padding for spacing */
+#  width: 100vw; /* Cover entire screen width */
+#  min-height: 100vh; /* Cover height till the bottom */
+  margin: 0; /* Remove horizontal centering */
+}
+
+.box {
+  background-color: #fff; /* White background for elevation effect */
+  width: 100%; /* Full width of the grid cell */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Elevation effect */
+  overflow: hidden; /* Prevent content overflow */
+  text-align: center;
+  min-width: 25vw; /* Set the minimum width of the box */
+}
+
+.box img {
+  width: 100%; /* Resize image to fit box width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.box p {
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 30px;
+}
+
+.box button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0d3964;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-family: 'Helvetica';
+}
+
+.box button:hover {
+  background-color: #0a2c4d;
+}
