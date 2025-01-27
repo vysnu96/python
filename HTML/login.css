@@ -1,49 +1,99 @@
-.body-container{
-position: relative;height: 100vh;
+:root {
+  --margin: 200px; /* Default margin value */
 }
 
 body{
-background: linear-gradient(to right, #FFDAB9, #FFC0CB);
+background-color: #071c2e;
+}
+
+label {
+  display: inline-block;
+  text-align: left; /* Align label text to the left */
+  width: 80%; /* Match the width of the input */
+  margin: 0 auto; /* Center label with input */
+}
+
+input::placeholder{font-family:'Aria';}
+
+.body-container{
+position: relative;
+height: 100vh;
+margin-top: 100px;
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+  max-width: calc(100% - var(--margin) * 4); /* Adjust width based on margin */
+background-color: purple;
+
 }
 
 .top-bar{
+top: 10px;
 position: relative;
 text-align: center;
-color: #654321;
+color: #FFFFFF;
+background-color: green;
+#margin-top: auto;
+#margin-bottom: auto;
+border-radius: 20px;
 }
-
-h1 {text-align: center;}
 
 .login{
-position: absolute;
-background-color: #FFFFFF;
-top: 50%;  left: 50%;  transform: translate(-50%, -50%); /* Center the element */
-align: center;
-padding: 10px;margin: 20px;
-width: 400px; height: 300px;
-border-radius: 10px;
+position: relative;
+background-color: red;
+#margin-top: auto;
+#margin-bottom: auto;
+margin: 0px;
+
 }
 
+.form-container{
+position: relative;
+background-color: grey;
+text-align: left;
+margin: 15px;
+
+}
+
+input{
+padding: 10px;
+border-radius: 10px;
+border: 1px solid;
+display: block;
+width: 80%;
+margin: 0 auto; /* Center horizontally */
+}
+
+button{
+padding: 10px;
+display: block;
+  margin: 0 auto; /* Center horizontally */
+  width: 80%; /* Align with the input box width */
+
+}
+
+.forgot-password {
+  display: block; /* Ensure it appears below the password input */
+  text-align: left; /* Align to the left */
+  font-family: Helvetica, sans-serif; /* Match the font style */
+  margin: 5px 0 0 10%; /* Adjust positioning slightly */
+}
+
+.create-account {
+  display: block; /* Ensure it's on its own line */
+  text-align: center; /* Center align */
+  font-family: Helvetica, sans-serif; /* Match the font style */
+  margin-bottom: 10px; /* Add spacing below */
+  font-size: smaller; /* Match the size with 'forgot password' */
+}
+
+# Welcome to Flag Quiz
+h1 {text-align: center; font-family: 'sans-serif';}
+
+# Login
 h2{
 text-align: center;
 }
 
-input {
-  display: block;
-  margin: 1px auto;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+#Placeholders
+input::placeholder { font-family: 'Aria'; }
 
-}
-
-button{
-  display: block;
-  margin: 1px auto;
-  padding: 10px 20px 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #D3C5E5;
-  cursor: pointer;
-
-}

@@ -7,19 +7,20 @@
     <link rel="icon" href="login.png" type="image/png">
 </head>
 <body>
+
 <div class="body-container">
-    <!--Contains the header row-->
+
     <div class="top-bar">
         <h1>Welcome to Flag Quiz</h1>
-    </div>
-    <!--End of header row-->
-
-    <!--Body elements-->
-    <div class="login">
-        <h2>Login</h2>
-            <form action="/login" method="post" class="form-container">
-                <input type="text" name="username" placeholder="Username" autofocus="autofocus" required><br>
-                <input type="password" name="password" placeholder="Password" required><br>
+        <div class="login">
+        <h2 style="font-family: 'Helvetica'; text-align: center;">Login</h2>
+            <div class="form-container">
+            <form action="/login" method="post">
+                <label for="username"><b><h3 style="font-family: 'Helvetica';">Username</h3></b></label>
+                <input type="text" id="username" name="username" placeholder="Username" autofocus="autofocus" required><br>
+                <label for="password"><b><h3 style="font-family: 'Helvetica';">Password</h3></b></label>
+                <input type="password" id="password" name="password" placeholder="Password" required><br>
+                <a href="/forgot-password" class="forgot-password">Forgot password?</a> <!-- Add this below the password input -->
     <!--Display error message-->
     <!--            {% with messages = get_flashed_messages() %}-->
     <!--              {% if messages %}-->
@@ -31,9 +32,15 @@
     <!--              {% endif %}-->
     <!--            {% endwith %}-->
     <!--            End of error message-->
+
+                <h2 class="create-account">Create an account</h2> <!-- Add this above the Login heading -->
+
                 <button type="submit">Login</button>
             </form>
+            </div>
+        </div>
     </div>
 </div>
+
 </body>
 </html>
