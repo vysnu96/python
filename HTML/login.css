@@ -6,14 +6,11 @@ body{
 background-color: #071c2e;
 }
 
-label {
-  display: inline-block;
-  text-align: left; /* Align label text to the left */
-  width: 80%; /* Match the width of the input */
-  margin: 0 auto; /* Center label with input */
-}
+input::placeholder{font-family:'Aria'; font-size: 18px;font-weight: normal;color: #999;}
 
-input::placeholder{font-family:'Aria';}
+input:focus {
+  outline: none; /* Remove the default focus outline */
+}
 
 .body-container{
 position: relative;
@@ -22,16 +19,18 @@ margin-top: 100px;
   margin-left: auto; /* Center horizontally */
   margin-right: auto; /* Center horizontally */
   max-width: calc(100% - var(--margin) * 4); /* Adjust width based on margin */
-background-color: purple;
-
+#background-color: purple;
+color: white;
+text-align: center;
 }
 
 .top-bar{
 top: 10px;
 position: relative;
 text-align: center;
-color: #FFFFFF;
-background-color: green;
+color: #000000;
+#background-color: green;
+background-color: white;
 #margin-top: auto;
 #margin-bottom: auto;
 border-radius: 20px;
@@ -39,19 +38,19 @@ border-radius: 20px;
 
 .login{
 position: relative;
-background-color: red;
+#background-color: red;
 #margin-top: auto;
 #margin-bottom: auto;
 margin: 0px;
-
+padding: 20px;
+border-radius: 0.5rem;
 }
 
 .form-container{
 position: relative;
-background-color: grey;
-text-align: left;
+#background-color: grey;
 margin: 15px;
-
+padding: 15px;
 }
 
 input{
@@ -59,16 +58,26 @@ padding: 10px;
 border-radius: 10px;
 border: 1px solid;
 display: block;
-width: 80%;
-margin: 0 auto; /* Center horizontally */
+  display: block; /* Ensure input is a block element */
+  width: 80%; /* Match input width with label */
+  margin: 0 auto 10px; /* Center horizontally with small space above and below */
+  padding: 10px; /* Add padding for better appearance */
 }
 
 button{
-padding: 10px;
+padding: 15px;
 display: block;
   margin: 0 auto; /* Center horizontally */
   width: 80%; /* Align with the input box width */
+background-color: #14599d;
+border: none;
+color: white;
+border-radius: 10px;
+cursor: pointer;
+}
 
+button:hover{
+background-color: #0d3964;
 }
 
 .forgot-password {
