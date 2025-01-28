@@ -1,13 +1,14 @@
 import hashlib
 import os, random
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 import pytz
+import json
 from countries import asia, africa, europe, northAmerica, southAmerica, oceania
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 client = MongoClient(
     "mongodb+srv://vishnu:C1kW0dlbf0UTsSb4@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
 app.config['SECRET_KEY'] = "secret"
@@ -264,7 +265,7 @@ def finish():
 @login_required
 def home():
     if current_user.is_authenticated:
-        return render_template('home.html')
+        return render_template('home.html', user=current_user.username)
     else:
         return render_template('login.html')
 
@@ -284,13 +285,14 @@ def login():
             user_obj = User(username=username)
             users_cache[username] = {"username": username}
             login_user(user_obj)
+            session.permanent = True # Mark session as permanent
             print(current_user)
             return redirect(url_for("home"))
         else:
-            flash("Invalid credentials")
+            flash("Invalid credentials", 'error')
             return render_template('login.html')
     else:
-        flash("User not found")
+        flash("User not found", 'error')
         return render_template('login.html')
     # return "Invalid login"
 
@@ -298,13 +300,20 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     username = request.form.get("username")
-    password = request.form.get("password")
-    salt = os.urandom(16)
-    hashed_password = hashlib.sha256(password.encode() + salt).hexdigest()
-    new_user = {"username": username, "password": hashed_password, "salt": salt.hex()}
     collection = database['users']
-    collection.insert_one(new_user)
-    return render_template('signUp.html')
+    user = collection.find_one({"username": username})
+    if user:
+        flash("User already exists. Please use different username", 'error')
+        return render_template('signUp.html')
+    else:
+        password = request.form.get("password")
+        salt = os.urandom(16)
+        hashed_password = hashlib.sha256(password.encode() + salt).hexdigest()
+        new_user = {"username": username, "password": hashed_password, "salt": salt.hex()}
+        collection = database['users']
+        collection.insert_one(new_user)
+        flash("Account created successfully. Go back to login", 'success')
+        return render_template('signUp.html')
 
 
 @app.route('/login_redirect', methods=['POST', 'GET'])
@@ -321,9 +330,17 @@ def signup_redirect():
 def logout():
     # Log out the user
     logout_user()
-    flash("Logged out successfully")
+    flash("Logged out successfully", 'success')
     return render_template('login.html')
 
+@app.route('/profile', methods=['POST', 'GET'])
+def profile():
+    collection = database['users_historic_data']
+    score_data = collection.find_one({"username": current_user.username}, {"_id": 0})
+    print(current_user.username)
+    print(score_data)
+    # return json.dumps(score_data, indent=4)
+    return score_data
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)

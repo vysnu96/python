@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Account</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='signup.css') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='signup.png') }}">
+    <title>Login</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="icon" href="login.png" type="image/png">
 </head>
 <body>
 
@@ -15,26 +15,25 @@
         <div class="login">
         <h2 style="font-family: 'Helvetica'; text-align: center;">Login</h2>
             <div class="form-container">
-            <form action="/signup" method="post">
+            <form action="/login" method="post">
 <!--                <label for="username"><b><h3 style="font-family: 'Helvetica';">Username</h3></b></label>-->
                 <input type="text" id="username" name="username" placeholder="Username" autofocus="autofocus" required><br>
 <!--                <label for="password"><b><h3 style="font-family: 'Helvetica';">Password</h3></b></label>-->
                 <input type="password" id="password" name="password" placeholder="Password" required><br>
 <!--                <a href="/forgot-password" class="forgot-password" style="margin-top:0;">Forgot Password</a> &lt;!&ndash; Add this below the password input &ndash;&gt;-->
+    <!--Display error message-->
+    <!--            {% with messages = get_flashed_messages() %}-->
+    <!--              {% if messages %}-->
+    <!--                <div>-->
+    <!--                  {% for message in messages %}-->
+    <!--                    <p>{{ message }}</p>-->
+    <!--                  {% endfor %}-->
+    <!--                </div>-->
+    <!--              {% endif %}-->
+    <!--            {% endwith %}-->
+    <!--            End of error message-->
 
-                <h2 class="create-account"><a onclick="document.location='/login_redirect'">Have account? Login</a></h2> <!-- Add this above the Login heading -->
-
-<!--    Display error message-->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                  {% if messages %}
-                    <div>
-                      {% for category, message in messages %}
-                        <p class="flash {{ category }}">{{ message }}</p>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-                {% endwith %}
-<!--                End of error message-->
+                <h2 class="create-account">Have account? Login</h2> <!-- Add this above the Login heading -->
 
                 <button type="submit">Create Account</button>
             </form>

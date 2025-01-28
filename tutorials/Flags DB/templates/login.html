@@ -2,100 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="{{ url_for('static', filename='login.png') }}" type="image/png">
-
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='login.png') }}">
 </head>
-
-<style>
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-.login-container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 50%;
-    max-width: 500px;
-    min-width: 300px;
-}
-
-h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-}
-
-input[type="text"],
-input[type="password"] {
-    display: block;
-    width: 50%; /* Adjusted width */
-    padding: 10px;
-    margin: 10px auto 20px auto; /* Centered and with space around */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-}
-
-button {
-    display: block;
-    width: 30%; /* Adjusted width */
-    padding: 10px;
-    margin: 20px auto; /* Centered */
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    text-align: center; /* Ensures text is centered */
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button:active {
-    transform: translateY(2px);
-}
-
-
-</style>
-
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            <input type="text" name="username" placeholder="Username" autofocus="autofocus" required>
-            <input type="password" name="password" placeholder="Password" required>
-<!--Display error message-->
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <div>
-                  {% for message in messages %}
-                    <p>{{ message }}</p>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            {% endwith %}
-<!--            End of error message-->
-            <button type="submit">Login</button>
-        </form>
-        <p><a onclick="document.location='/signup_redirect'">Not a user yet? Sign Up here</a></p>
+
+<div class="body-container">
+<h1>Welcome to Flag Quiz</h1>
+    <div class="top-bar">
+
+        <div class="login">
+        <h2 style="font-family: 'Helvetica'; text-align: center;">Login</h2>
+            <div class="form-container">
+            <form action="/login" method="post">
+<!--                <label for="username"><b><h3 style="font-family: 'Helvetica';">Username</h3></b></label>-->
+                <input type="text" id="username" name="username" placeholder="Username" autofocus="autofocus" required><br>
+<!--                <label for="password"><b><h3 style="font-family: 'Helvetica';">Password</h3></b></label>-->
+                <input type="password" id="password" name="password" placeholder="Password" required><br>
+                <a href="/forgot-password" class="forgot-password" style="margin-top:0;">Forgot Password</a> <!-- Add this below the password input -->
+
+                <h2 class="create-account"><a onclick="document.location='/signup_redirect'">Create an account</a></h2> <!-- Add this above the Login heading -->
+<!--    Display error message-->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    <div>
+                      {% for category, message in messages %}
+                        <p class="flash {{ category }}">{{ message }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+<!--                End of error message-->
+                <button type="submit">Login</button>
+            </form>
+            </div>
+        </div>
     </div>
+</div>
+
 </body>
 </html>

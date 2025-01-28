@@ -2,42 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flag Quiz</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='play.css') }}">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='home.png') }}">
 </head>
 <body>
 
-    <div class="reset">
-        <a onclick="document.location='/logout'" class="btn">Logout</a>
+<!--Contains the header row-->
+<div class="top-bar">
+    <div class="menu-item"><h1>Welcome {{user}}</h1></div>
+    <div class="menu-item"><button class="profile"><a onclick="document.location='/profile'">Profile</a></button></div>
+    <div class="menu-item"><button class="logout"><a onclick="document.location='/logout'">Logout</a></button></div>
+</div>
+<!--End of header row-->
+
+<div><h1 class="title-bar" >Flag Quiz</h1></div>
+
+<div class="body-container">
+    <div class="box">
+        <img src="{{ url_for('static', filename='images/continent/asia.jpg') }}" alt="Asia">
+        <p>Asia</p>
+        <form action="/start_game" method="post" style="display: inline;">
+            <button type="submit" class="continent-button" name="continent" value="asia">Play</button>
+        </form>
     </div>
 
-    <div class="main-container">
-        <h1>Flag Quiz</h1>
+
+    <div class="box">
+        <img src="{{ url_for('static', filename='images/continent/africa.jpg') }}" alt="Africa">
+        <p>Africa</p>
+        <form action="/start_game" method="post" style="display: inline;">
+            <button type="submit" class="continent-button" name="continent" value="africa">Play</button>
+        </form>
     </div>
 
-    <div class="button-container">
+
+    <div class="box">
+        <img src="{{ url_for('static', filename='images/continent/europe.jpg') }}" alt="Europe">
+        <p>Europe</p>
         <form action="/start_game" method="post" style="display: inline;">
-            <button type="submit" class="continent-button" name="continent" value="africa">Africa</button>
+            <button type="submit" class="continent-button" name="continent" value="europe">Play</button>
         </form>
-        <form action="/start_game" method="post" style="display: inline;">
-            <button type="submit" class="continent-button" name="continent" value="asia">Asia</button>
-        </form>
-        <form action="/start_game" method="post" style="display: inline;">
-            <button type="submit" class="continent-button" name="continent" value="europe">Europe</button>
-        </form>
-        <form action="/start_game" method="post" style="display: inline;">
-            <button type="submit" class="continent-button" name="continent" value="northAmerica">North America</button>
-        </form>
-        <form action="/start_game" method="post" style="display: inline;">
-            <button type="submit" class="continent-button" name="continent" value="southAmerica">South America</button>
-        </form>
-        <form action="/start_game" method="post" style="display: inline;">
-            <button type="submit" class="continent-button" name="continent" value="oceania">Oceania</button>
-        </form>
-        <p>{{user}}</p>
     </div>
 
+
+    <div class="box">
+        <img src="{{ url_for('static', filename='images/continent/northAmerica.jpg') }}" alt="North America">
+        <p>North America</p>
+        <form action="/start_game" method="post" style="display: inline;">
+            <button type="submit" class="continent-button" name="continent" value="northAmerica">Play</button>
+        </form>
+    </div>
+
+
+    <div class="box">
+        <img src="{{ url_for('static', filename='images/continent/southAmerica.jpg') }}" alt="South America">
+        <p>South America</p>
+        <form action="/start_game" method="post" style="display: inline;">
+            <button type="submit" class="continent-button" name="continent" value="southAmerica">Play</button>
+        </form>
+    </div>
+
+
+    <div class="box">
+        <img src="{{ url_for('static', filename='images/continent/oceania.jpg') }}" alt="Oceania">
+        <p>Oceania</p>
+        <form action="/start_game" method="post" style="display: inline;">
+            <button type="submit" class="continent-button" name="continent" value="oceania">Play</button>
+        </form>
+    </div>
+
+</div>
 </body>
 </html>

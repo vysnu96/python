@@ -66,8 +66,7 @@ body {
 .image-container img {
     max-width: 100%;
     border-radius: 10px;
-    height: 200px; /* Set your desired fixed height */
-    object-fit: cover;
+    height: auto;
 }
 
 
@@ -87,25 +86,11 @@ body {
   border-radius: 5px;
   cursor: pointer;
   background-color: #f9f9f9;
-  color: inherit;
-  font: inherit;
-  display: inline-block;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
 }
 
 .option:hover {
   background-color: #e0e0e0;
 }
-
-.option-button {
-  all: unset; /* Reset default button styles */
-  display: block; /* Make it behave like a block element */
-  width: 100%; /* Match the parent width */
-  height: 100%;
-  text-align: center;
-}
-
 
 .next-button {
     display: flex;

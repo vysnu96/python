@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="icon" href="login.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+<!--    <link rel="icon" href="{{ url_for('static', filename='login.png') }}" type="image/png">-->
 </head>
 <body>
 
@@ -21,17 +21,17 @@
 <!--                <label for="password"><b><h3 style="font-family: 'Helvetica';">Password</h3></b></label>-->
                 <input type="password" id="password" name="password" placeholder="Password" required><br>
                 <a href="/forgot-password" class="forgot-password" style="margin-top:0;">Forgot Password</a> <!-- Add this below the password input -->
-    <!--Display error message-->
-    <!--            {% with messages = get_flashed_messages() %}-->
-    <!--              {% if messages %}-->
-    <!--                <div>-->
-    <!--                  {% for message in messages %}-->
-    <!--                    <p>{{ message }}</p>-->
-    <!--                  {% endfor %}-->
-    <!--                </div>-->
-    <!--              {% endif %}-->
-    <!--            {% endwith %}-->
-    <!--            End of error message-->
+<!--    Display error message-->
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <div>
+                      {% for message in messages %}
+                        <p>{{ message }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+<!--                End of error message-->
 
                 <h2 class="create-account">Create an account</h2> <!-- Add this above the Login heading -->
 
