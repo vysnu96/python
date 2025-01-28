@@ -1,5 +1,6 @@
 import hashlib
 import os, random
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from pymongo import MongoClient
@@ -9,9 +10,13 @@ import json
 from countries import asia, africa, europe, northAmerica, southAmerica, oceania
 
 app = Flask(__name__, static_folder='static')
-client = MongoClient(
-    "mongodb+srv://vishnu:C1kW0dlbf0UTsSb4@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
-app.config['SECRET_KEY'] = "secret"
+
+MONGO_DB_URL = os.getenv('MONGO_URL')
+SECRET_KEY = os.getenv('SECRET_KEY')
+load_dotenv()
+client = MongoClient(MONGO_DB_URL)
+app.config['SECRET_KEY'] = SECRET_KEY
+
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)  # Set session lifetime to 1 hour
 app.config['SESSION_PERMANENT'] = True  # Enable permanent sessions
 database = client['flagQuiz']
