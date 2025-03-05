@@ -8,7 +8,7 @@ formatted_time = now.strftime("%d-%B-%Y %I:%M %p")
 print("Current date and time:", formatted_time)
 
 client = MongoClient(
-    "mongodb+srv://vishnu:C1kW0dlbf0UTsSb4@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
+    "mongodb+srv://<username>:<pwd>@targeryen.bvinedn.mongodb.net/?retryWrites=true&w=majority&appName=targeryen")
 database = client['flagQuiz']
 collection = database['users_historic_data']
 
