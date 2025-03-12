@@ -22,7 +22,7 @@ services:
       ME_CONFIG_BASICAUTH: false
 
   python:
-    image: vysnu96/python:mongo-db
+    image: vysnu96/flag-quiz-with-db:1.0
     restart: always
     ports:
       - 5000:5000
