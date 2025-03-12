@@ -51,7 +51,7 @@ def forgot_password():
 @app.route('/get_pw', methods=['POST', 'GET'])
 def get_pw():
     name = request.form.get('name')
-    usernam = request.form.get('username')
+    username = request.form.get('username')
     print(name, username)
     if name is not None and username is None:
         find = collection.find_one({"name": name}, {"_id": 0})
