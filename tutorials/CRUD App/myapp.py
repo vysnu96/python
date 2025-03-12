@@ -8,8 +8,8 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, f
 from pymongo import MongoClient
 import bcrypt
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
 
 app = Flask(__name__)
 
@@ -22,8 +22,8 @@ client = MongoClient(
 database = client['users']
 collection = database['details']
 
-SENDGRID_API_KEY = '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'
-SENDER_EMAIL = 'vysnu96@gmail.com'
+# SENDGRID_API_KEY = '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'
+# SENDER_EMAIL = 'vysnu96@gmail.com'
 
 @app.route('/')
 def first():

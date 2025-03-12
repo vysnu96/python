@@ -157,7 +157,8 @@ def start_game():
                            total=number_of_countries,
                            remaining=question_no, option1=shuffle[0],
                            option2=shuffle[1],
-                           option3=shuffle[2], option4=shuffle[3], condition=False, score=score, continent=continentName.upper(), isItCorrect=None)
+                           option3=shuffle[2], option4=shuffle[3], condition=False, score=score,
+                           continent=continentName.upper(), isItCorrect=None)
 
 
 @app.route('/play', methods=['POST', 'GET'])
@@ -200,15 +201,17 @@ def play():
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],
                                option2=shuffle[1],
-                               option3=shuffle[2], option4=shuffle[3], condition=True, score=score, continent=continentName.upper(),
-                               opt1=opt1, opt2=opt2, opt3=opt3, opt4 = opt4, isItCorrect=True)
+                               option3=shuffle[2], option4=shuffle[3], condition=True, score=score,
+                               continent=continentName.upper(),
+                               opt1=opt1, opt2=opt2, opt3=opt3, opt4=opt4, isItCorrect=True)
     else:
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],
                                option2=shuffle[1],
-                               option3=shuffle[2], option4=shuffle[3], condition=True, score=score, continent=continentName.upper(),
-                               opt1=opt1, opt2=opt2, opt3=opt3, opt4 = opt4, isItCorrect=False)
+                               option3=shuffle[2], option4=shuffle[3], condition=True, score=score,
+                               continent=continentName.upper(),
+                               opt1=opt1, opt2=opt2, opt3=opt3, opt4=opt4, isItCorrect=False)
 
 
 @app.route('/nxt', methods=['POST', 'GET'])
@@ -225,7 +228,8 @@ def nxt():
                            total=number_of_countries,
                            remaining=question_no, option1=shuffle[0],
                            option2=shuffle[1],
-                           option3=shuffle[2], option4=shuffle[3], condition=False, score=score, continent=continentName.upper(), isItCorrect=None)
+                           option3=shuffle[2], option4=shuffle[3], condition=False, score=score,
+                           continent=continentName.upper(), isItCorrect=None)
 
 
 @app.route('/finish', methods=['POST', 'GET'])
@@ -290,7 +294,7 @@ def login():
             user_obj = User(username=username)
             users_cache[username] = {"username": username}
             login_user(user_obj)
-            session.permanent = True # Mark session as permanent
+            session.permanent = True  # Mark session as permanent
             print(current_user)
             return redirect(url_for("home"))
         else:
@@ -338,6 +342,7 @@ def logout():
     flash("Logged out successfully", 'success')
     return render_template('login.html')
 
+
 @app.route('/profile', methods=['POST', 'GET'])
 def profile():
     collection = database['users_historic_data']
@@ -346,6 +351,7 @@ def profile():
     print(score_data)
     # return json.dumps(score_data, indent=4)
     return score_data
+
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
