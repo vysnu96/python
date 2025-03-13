@@ -33,3 +33,34 @@ font-size: 20px;
 .logout:hover{
 background-color: #0d3964;
 }
+
+
+body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+th { background-color: #f4f4f4; }
+.correct { background-color: #acf2bf;}
+.incorrect { background-color: #f2acae;}
+
+
+.toggle-content {
+    display: none;
+    margin-top: 5px;
+
+}
+.toggle-btn {
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    display: block; /* Makes button take full width */
+    margin-bottom: 1px; /* Adds a 1px gap between buttons */
+    padding: 5px 10px; /* Adjust padding for better spacing */
+}
+.quiz-image {
+
+    height: 50px;  /* Maintains aspect ratio */
+    max-width: 100%; /* Ensures responsiveness */
+    object-fit: cover; /* Ensures images maintain aspect ratio */
+}
