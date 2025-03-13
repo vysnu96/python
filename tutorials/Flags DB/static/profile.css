@@ -1,0 +1,35 @@
+.top-bar {
+  background-color: #071c2e;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+#  justify-content: space-between; /* Align buttons to the right */
+  align-items: center;
+  color: #fff;
+}
+
+.top-bar h1 {
+  margin: 0;
+}
+
+.menu-item:first-child{margin-right: auto;}
+
+.logout {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 20px; /* Add spacing between buttons */
+  background: none;
+}
+
+.logout a {
+color: #fff;
+font-family: 'Helvetica';
+font-size: 20px;
+
+}
+
+.logout:hover{
+background-color: #0d3964;
+}

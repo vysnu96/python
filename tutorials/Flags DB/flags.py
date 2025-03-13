@@ -241,6 +241,7 @@ def finish():
     # print("Current date and time:", formatted_time)
 
     new_result = {
+        "continent": continentName,
         "score": score,
         "user_choice": user_choices,
         "correct_answer": selected_continent,
@@ -350,8 +351,8 @@ def profile():
     print(current_user.username)
     print(score_data)
     # return json.dumps(score_data, indent=4)
-    return score_data
-
+    # return score_data
+    return render_template('profile.html', user=current_user.username, score_data=score_data)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
