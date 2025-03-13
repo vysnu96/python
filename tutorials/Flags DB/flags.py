@@ -355,4 +355,4 @@ def profile():
     return render_template('profile.html', user=current_user.username, score_data=score_data)
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
