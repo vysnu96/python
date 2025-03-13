@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile.css') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='profile.png') }}">
+</head>
+
+<body>
+<!--Contains the header row-->
+<div class="top-bar">
+    <div class="menu-item"><h1>{{user}}</h1></div>
+    <div class="menu-item"><button class="logout"><a onclick="document.location='/logout'">Logout</a></button></div>
+</div>
+<!--End of header row-->
+
+<h2>Your historic score report</h2>
+
+{% for result in score_data.quiz_results %}
+<button class="toggle-btn" onclick="toggleContent(this)">&#11162; Played on: {{ result.date }}, Score: {{ result.score }}/{{ result.correct_answer | length }},
+{% if result.continent is defined %}
+    Played for: {{ result.continent }}
+{% else %}
+    N/A
+{% endif %}
+</button>
+<div class="toggle-content">
+
+    <table>
+        <thead>
+            <tr>
+                
+                <th colspan="2">Answers</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+
+            <td colspan="2">
+                <table>
+                    <th> Flag </th>
+                    <th>Correct Answer</th>
+                    <th>You selected</th>
+                    {% for i in range(result.correct_answer | length) %}
+                    <tr>
+                        <td><img src="{{ url_for('static', filename='images/' + result.correct_answer[i] + '.png') }}" alt="Quiz Image" class="quiz-image"></td>
+                        <td>{{ result.correct_answer[i] }}</td>
+                        <td {% if result.correct_answer[i] == result.user_choice[i] %} class="correct" {% else %} class="incorrect" {% endif %}>
+                            {% if i < result.user_choice | length %}
+                                {{ result.user_choice[i] }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+{% endfor %}
+
+</body>
+
+<script>
+    function toggleContent(button) {
+        var content = button.nextElementSibling;
+
+
+        // Store original text in a data attribute if not already set
+        if (!button.dataset.text) {
+            button.dataset.text = button.innerText.slice(2); // Store text after icon
+        }
+
+
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";
+            button.innerHTML = "&#11163;" + button.dataset.text; // Keep full text
+        } else {
+            content.style.display = "none";
+            button.innerHTML = "&#11162; " + button.dataset.text; // Keep full text
+        }
+    }
+</script>
+
+</html>
