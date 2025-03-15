@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 ENV APP_PORT=0.0.0.0
-ENV MONGO_URL
-ENV SECRET_KEY
+ENV MONGO_URL=
+ENV SECRET_KEY=
 EXPOSE 5000
 ENTRYPOINT ["python", "flags.py"]
