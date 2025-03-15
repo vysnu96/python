@@ -92,6 +92,7 @@ background-color: #0d3964;
   font-family: Helvetica, sans-serif; /* Match the font style */
   margin-bottom: 10px; /* Add spacing below */
   font-size: smaller; /* Match the size with 'forgot password' */
+  cursor: pointer;
 }
 
 # Welcome to Flag Quiz

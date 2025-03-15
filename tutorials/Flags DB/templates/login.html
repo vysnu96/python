@@ -23,7 +23,7 @@
                 <input type="password" id="password" name="password" placeholder="Password" required><br>
                 <a href="/forgot-password" class="forgot-password" style="margin-top:0;">Forgot Password</a> <!-- Add this below the password input -->
 
-                <h2 class="create-account"><a onclick="document.location='/signup_redirect'">Create an account</a></h2> <!-- Add this above the Login heading -->
+                <h2 class="create-account"><a onclick="document.location='/signup_redirect'">Don't have account? Create one</a></h2> <!-- Add this above the Login heading -->
 <!--    Display error message-->
                 {% with messages = get_flashed_messages(with_categories=true) %}
                   {% if messages %}
