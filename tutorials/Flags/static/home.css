@@ -1,0 +1,130 @@
+.top-bar {
+  background-color: #071c2e;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+#  justify-content: space-between; /* Align buttons to the right */
+  align-items: center;
+  color: #fff;
+}
+
+.top-bar h1 {
+  margin: 0;
+}
+
+.menu-item:first-child{margin-right: auto;}
+
+.logout {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 20px; /* Add spacing between buttons */
+  background: none;
+}
+
+.logout a {
+color: #fff;
+font-family: 'Helvetica';
+font-size: 20px;
+
+}
+
+.logout:hover{
+background-color: #0d3964;
+}
+
+
+.profile {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+}
+
+.profile:hover{
+background-color: #0d3964;
+}
+
+.profile a {
+color: #fff;
+font-family: 'Helvetica';
+font-size: 20px;
+}
+
+.title-bar{
+color:#000;
+background-color: #fff;
+margin: 0px;
+padding: 15px;
+text-align: center;
+}
+
+
+body {
+  margin: 0; /* Remove spacing between screen and body */
+  background-color: #fff; /* Complementary color (white) for body */
+}
+
+h1{align:left;}
+
+.body-container {
+#     background-color: #0d3964;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+  padding: 10px; /* Add padding for spacing */
+#  width: 100vw; /* Cover entire screen width */
+#  min-height: 100vh; /* Cover height till the bottom */
+  margin-left: 50px; /* Remove horizontal centering */
+  margin-right: 50px;
+  height: 100vh; /* Full height of the viewport */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  gap: 5px;
+  bottom: 1px;
+
+}
+
+.box {
+  min-width: 25vw; /* Responsive width */
+  height: calc(100vh / 3 - 10px); /* Adjusted to include reduced margin */
+  display: flex; /* Enable flexbox layout */
+  flex-direction: column; /* Stack contents vertically */
+  justify-content: space-between; /* Space out items evenly */
+  align-items: center; /* Center contents horizontally */
+  overflow: hidden; /* Prevent overflow from distorting layout */
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Elevate the boxes */
+  background-color: #fff; /* Background color for the box */
+  border-radius: 8px; /* Add rounded corners */
+  margin: 10px; /* Reduce margin to minimize space between rows */
+
+}
+
+
+.box img {
+  max-height: 50%; /* Ensure the image does not exceed half the box height */
+  width: auto;
+  object-fit: contain; /* Ensure the image fits without distortion */
+}
+
+.box p {
+  font-size: 1rem; /* Adjust text size */
+  text-align: center;
+  margin: 5px 0;
+}
+
+.box button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #0d3964;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+
+.box button:hover {
+  background-color: #0a2c4d;
+}

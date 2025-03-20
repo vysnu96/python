@@ -2,77 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{continent}}</title>
+    <title>Play</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='play.css') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='play.png') }}">
 </head>
-
 <body>
-    <div class="header">
-<!--        Display the Home Icon-->
-        <div class="home-icon">
-            <a href="/" class="btn">Home</a>
+<div class="top-bar">
+    <div class="menu-item"><button class="top-bar-button"><a href="/">Home</a></button></div>
+    <div class="menu-item"><h1 style="display: inline;">{{continent}}</h1>
+        <p style="font-size: 18px; text-align: center;">{{ remaining }}/{{ total }}</p>
+    </div>
+    <div class="menu-item"><button class="top-bar-button"><a href="/finish">Finish</a></button></div>
+</div>
+
+<div style="position: relative; width: 100%; font-size: 24px;">
+    <div style="position: absolute; right: 0; top: 0; padding: 5px; color: black; border-radius: 5px;">
+        Score: {{ score }}
+    </div>
+</div>
+
+
+<div class="quiz-container">
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/' + flag_image + '.png') }}" alt="Quiz Image">
+    </div>
+
+    <div class="options-row">
+        <div class="option" style="background-color:{{opt1}}">
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" id="option1" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %} >{{option1}}</button>
+            </form>
         </div>
-<!--        Display the selected continent name-->
-        <h1>{{continent}}</h1>
-        <div class="reset">
-            <a href="/finish" class="btn">Finish</a>
+
+        <div class="option" style="background-color:{{opt2}}">
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" id="option2" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %} >{{option2}}</button>
+            </form>
         </div>
     </div>
 
-<!--Display the number of country we're in / number of countries in the continent-->
-    <div style="position: relative; font-size: 24px;">{{ remaining }}/{{ total }}</div>
-
-    <!--Display score-->
-    <div class="score">Score: {{ score }}</div>
-
-<!--    Main content of the game with flag image and options-->
-    <div class="content">
-
-<!--        Block showing the flag image -->
-        <div class="image-box">
-            <img src="{{ url_for('static', filename='images/' + flag_image + '.png') }}" alt="Quiz Image">
-        </div>
-
-<!--    If the answer is correct-->
-        <div>
-            {%if isItCorrect==True%}
-            <p>&#9989;</p>
-            {%elif isItCorrect==False%}
-            <p>&#10060;</p>
-            {%endif%}
-        </div>
-
-
-        <div class="options-container">
-            <!-- Form for each button -->
+    <div class="options-row">
+        <div class="option" style="background-color:{{opt3}}">
             <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option1}}"{% if condition %}disabled {% endif %} style="background-color:{{opt1}}">{{option1}}</button>
-            </form><br>
-            <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option2}}"{% if condition %}disabled {% endif %} style="background-color:{{opt2}}">{{option2}}</button>
-            </form><br>
-            <form action="play" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %} style="background-color:{{opt3}}">{{option3}}</button>
-            </form>
-
-        </div>
-        {% if remaining < total %}
-        <div>
-            <form action="nxt" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="next" value="{{option3}}" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Next</button>
+                <button class="option-button" type="submit" id="option3" name="answer" value="{{option3}}"{% if condition %}disabled{% endif %} >{{option3}}</button>
             </form>
         </div>
-        {% endif %}
 
+        <div class="option" style="background-color:{{opt4}}">
+            <form action="play" method="POST" style="display:inline;">
+                <button class="option-button" type="submit" id="option4" name="answer" value="{{option4}}"{% if condition %}disabled{% endif %} >{{option4}}</button>
+            </form>
+        </div>
+    </div>
+    {% if remaining < total %}
+    <div class="next-button">
+        <form action="nxt" method="POST" style="display:inline;">
+                <button style="padding: 5px 10px;" class="option-button" type="submit" name="next" value="{{option3}}" {%if condition%}style="background-color:#071c2e;"{%endif%}{% if not condition %}disabled{% endif %}>Next</button>
+        </form>
+    </div>
+    {% endif %}
         {% if remaining == total %}
-        <div>
-            <form action="finish" method="POST" style="display:inline;">
-                <button class="option-button" type="submit" name="finish" {%if condition%}style="background-color:#0211b5;"{%endif%}{% if not condition %}disabled{% endif %}>Finish</button>
-            </form>
-        </div>
-        {% endif %}
-
+    <div class="next-button">
+        <form action="finish" method="POST" style="display:inline;">
+                <button style="padding: 5px 10px;" class="option-button" type="submit" name="finish" {%if condition%}style="background-color:#071c2e;"{%endif%}{% if not condition %}disabled{% endif %}>Finish</button>
+        </form>
     </div>
+    {% endif %}
+</div>
+
 </body>
 </html>

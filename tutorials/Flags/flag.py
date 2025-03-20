@@ -22,6 +22,8 @@ global counter
 global score
 global user_choices
 global shuffle
+global updated_list
+global correct_option
 
 
 @app.route('/')
@@ -66,43 +68,57 @@ def reset():
     selected_continent, continentName = None, None
     number_of_countries, question_no, counter, score = 0, 0, 0, 0
 
+
+def select_choices(input):
+    global shuffle
+    choices = []
+    while len(choices) < 3:
+        value = random.choice(input)
+        if value != selected_continent[counter] and value not in choices:
+            choices.append(value)
+
+    shuffle = [selected_continent[counter], choices[0], choices[1], choices[2]]
+    random.shuffle(shuffle)
+
 def random_func(remaining_values):
     global shuffle
     random_values = random.sample(remaining_values, 2)
     shuffle = [selected_continent[counter], random_values[0], random_values[1]]
     random.shuffle(shuffle)
 
-@app.route('/start', methods=['POST', 'GET'])
+@app.route('/start', methods=['GET', 'POST'])
 def start():
     initialize()
-    global random_values, score
-    remaining_values = [country for country in selected_continent if country != selected_continent[counter]]
-    random_func(remaining_values)
+    global updated_list, correct_option
+    correct_option = selected_continent[counter]
+    updated_list = selected_continent[1:]
+    select_choices(updated_list)
     return render_template('play.html', flag_image=selected_continent[counter],
                            total=number_of_countries,
                            remaining=question_no, option1=shuffle[0],
                            option2=shuffle[1],
-                           option3=shuffle[2], condition=False, score=score, continent=continentName.upper(), isItCorrect=None)
+                           option3=shuffle[2], option4=shuffle[3], condition=False, score=score,
+                           continent=continentName.upper(), isItCorrect=None)
 
 
 @app.route('/play', methods=['POST', 'GET'])
 def play():
-    opt1, opt2, opt3 = None, None, None
+    opt1, opt2, opt3, opt4 = None, None, None, None
     clicked = request.form.get("answer")
     global score
     user_choices.append(clicked)
-    print(clicked)
-    print(shuffle)
 
-#If block to mark the option red if the user clicked the wrong option
+    # If block to mark the option red if the user clicked the wrong option
     if clicked != selected_continent[counter]:
         pos = shuffle.index(clicked) + 1
         if pos == 1:
             opt1 = "red"
         elif pos == 2:
             opt2 = "red"
-        else:
+        elif pos == 3:
             opt3 = "red"
+        else:
+            opt4 = "red"
     else:
         pass
 
@@ -112,49 +128,53 @@ def play():
         opt1 = "green"
     elif position == 2:
         opt2 = "green"
-    else:
+    elif position == 3:
         opt3 = "green"
+    else:
+        opt4 = "green"
     print(opt1, opt2, opt3)
 
-    if clicked.strip().lower() == selected_continent[counter].strip().lower():
+    if clicked == selected_continent[counter]:
         score += 1
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],
                                option2=shuffle[1],
-                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=True, opt1=opt1, opt2=opt2, opt3=opt3)
+                               option3=shuffle[2], option4=shuffle[3], condition=True, score=score,
+                               continent=continentName.upper(),
+                               opt1=opt1, opt2=opt2, opt3=opt3, opt4=opt4, isItCorrect=True)
     else:
-        # print("Else from play called")
         return render_template('play.html', flag_image=selected_continent[counter],
                                total=number_of_countries,
                                remaining=question_no, option1=shuffle[0],
                                option2=shuffle[1],
-                               option3=shuffle[2], condition=True, score=score, continent=continentName.upper(), isItCorrect=False, opt1=opt1, opt2=opt2, opt3=opt3)
-
+                               option3=shuffle[2], option4=shuffle[3], condition=True, score=score,
+                               continent=continentName.upper(),
+                               opt1=opt1, opt2=opt2, opt3=opt3, opt4=opt4, isItCorrect=False)
 
 @app.route('/nxt', methods=['POST', 'GET'])
 def nxt():
     global question_no, selected_continent, counter, score
     question_no += 1
     counter += 1
-    # print("counter", counter)
-    global random_values
-    remaining_values = [country for country in selected_continent if country != selected_continent[counter]]
-    random_func(remaining_values)
+    global updated_list, correct_option
+    correct_option = selected_continent[counter]
+    updated_list = selected_continent[1:]
+    select_choices(updated_list)
     return render_template('play.html', flag_image=selected_continent[counter],
                            total=number_of_countries,
                            remaining=question_no, option1=shuffle[0],
                            option2=shuffle[1],
-                           option3=shuffle[2], condition=False, score=score, continent=continentName.upper(), isItCorrect=None)
+                           option3=shuffle[2], option4=shuffle[3], condition=False, score=score,
+                           continent=continentName.upper(), isItCorrect=None)
 
 
 @app.route('/finish', methods=['POST', 'GET'])
 def finish():
-    print("your choice",user_choices)
-    print("Answer",selected_continent)
     return render_template('result.html', continent=continentName.upper(), score=score, total=number_of_countries,
-                           continent_image=continentName, user_choices=user_choices, selected_continent=selected_continent)
+                           continent_image=continentName, user_choices=user_choices,
+                           selected_continent=selected_continent)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
