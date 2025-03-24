@@ -1,70 +1,77 @@
-.container {
-    position: relative;
-    margin: 0px;
-    top: 0px;
-    height: 100vh; /* Set height for the container */
-    display: flex;
-    flex-direction: column; /* Stack header and body vertically */
+.top-bar {
+  background-color: #071c2e;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  width: 100%;
 }
 
-.header-container {
-    background-image: linear-gradient(to right, violet, green, indigo);
-    height: 70px;
-    display: flex;
-    align-items: center; /* Vertically center content */
-    position: relative;
+.top-bar-button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+#  margin-left: 20px; /* Add spacing between buttons */
+  background: none;
 }
 
-.home-button button {
-    margin-left: 10px; /* Replace absolute positioning with margin */
-    background-color: transparent;
-    padding: 10px;
-    left: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    border-radius: 10px;
-    transition-duration: 0.4s;
+.top-bar-button a {
+color: #fff;
+font-family: 'Helvetica';
+font-size: 20px;
+
 }
 
-button:hover {
-    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 7px 5px 0 rgba(0,0,0,0.19);
-  }
+.top-bar-button:hover{
+background-color: #0d3964;
+}
 
-.title {
-    margin: 0 auto; /* Center title horizontally within header */
-    font-size: 25px;
+.menu-item:first-child{margin-right: auto;}
+
+.title-bar{
+color:#000;
+background-color: #fff;
+margin: 0px;
+padding: 15px;
+text-align: center;
 }
 
 .body-container {
-    flex-grow: 1;
     display: flex;
-    justify-content: space-between; /* Space between the left and right sections */
-    align-items: center; /* Vertically center items */
-    margin: 0 auto; /* Center the container horizontally */
-    width: 80%; /* Adjust the width to leave space on the sides */
-    /*max-width: 1200px;  Optional: Limit the maximum width for larger screens */
-    gap: 2px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto; /* Center body-container and add spacing */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px; /* Adjust width */
 }
 
-.left, .right {
-    display: flex;
-    align-items: center; /* Ensure content is vertically centered inside */
-    flex: 1; /* Allow the left container to take up available space */
-}
-
-.left img {
-    max-width: 100%;
+.body-container .image-box {
+    position: relative;
+    width: 100%;
     height: auto;
-    max-height: 300px; /* Optional: Limit image height */
-    /* background-color: bisque; */
 }
 
-.right {
+.body-container .image-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.body-container .image-box div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
     font-size: 20px;
-    text-align: left; /* Ensure text is aligned properly */
-    /* background-color: cadetblue; */
-    /* flex: 0; */ /* Right container takes only its content width */
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .result {

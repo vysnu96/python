@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello, World!</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='result.css') }}">
-  </head>
-  <body>
-    <div class="container">
-        <div class="header-container">
-            <div class="home-button">
-                <a href="/"><button>Home</button></a>
-            </div>
-            <div class="title">{{continent}}</div>
-        </div>
-    
-    
-    <div class="body-container">
-        <div class="left">
-            <img src="{{ url_for('static', filename='images/continent/' + continent_image + '.jpg') }}" alt="Quiz Image">
-        </div>
-        <div class="right">
-            {{continent}}: {{ score }}/{{ total }}
-        </div>
+<head>
+<title>Score Card</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='result.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <div class="menu-item"><button class="top-bar-button"><a onclick="document.location='/'">Home</a></button></div>
+</div>
+
+<div><h1 class="title-bar">Score Card</h1></div>
+
+<div class="body-container">
+    <div class="image-box">
+        <img src="{{ url_for('static', filename='images/continent/' + continent_image + '.jpg') }}" alt="Quiz Image">
     </div>
-  </div>
+    <div>{{continent}}: {{ score }}/{{ total }}</div>
+</div>
 
   {% for i in selected_continent %}
     {% if user_choices[loop.index0] is defined and user_choices[loop.index0] %}
@@ -38,5 +34,5 @@
     {% endif %}
   {%endfor%}
 
-  </body>
+</body>
 </html>
