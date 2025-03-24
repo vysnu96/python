@@ -3,12 +3,15 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
+  none
+
+pr:
   branches:
     include:
-      - main
+    - main
   paths:
     include:
-      - tutorials/Flags DB
+    - tutorials/Flags DB/*
 resources:
 - repo: self
 
