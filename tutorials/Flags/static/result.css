@@ -108,3 +108,16 @@ text-align: center;
     box-sizing: border-box; /* Include padding in the width calculation */
     text-align: left; /* Align text to the left */
 }
+
+.quiz-image {
+
+    height: 50px;  /* Maintains aspect ratio */
+    max-width: 100%; /* Ensures responsiveness */
+    object-fit: cover; /* Ensures images maintain aspect ratio */
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+th { background-color: #f4f4f4; }
+.correct { background-color: #acf2bf;}
+.incorrect { background-color: #f2acae;}
