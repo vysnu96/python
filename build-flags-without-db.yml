@@ -32,7 +32,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'Docker Hub'
-        repository: 'vysnu96/flag-quiz-with-db'
+        repository: 'vysnu96/flag-quiz-without-db'
         command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/tutorials/Flags/Dockerfile'
         tags: |
