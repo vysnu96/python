@@ -2,8 +2,8 @@
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-trigger:
-  none
+# trigger:
+#   none
 
 pr:
   branches:
@@ -11,7 +11,8 @@ pr:
     - main
   paths:
     include:
-    - tutorials/Flags DB/*
+    - tutorials/Flags/*
+
 resources:
 - repo: self
 
@@ -27,19 +28,12 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     command: build
-    #     dockerfile: '$(Build.SourcesDirectory)/tutorials/Flags DB/Dockerfile'
-    #     tags: |
-    #       $(tag)
-    
     - task: Docker@2
+      displayName: Build an image
       inputs:
         containerRegistry: 'Docker Hub'
-        repository: 'vysnu96/flag-quiz-with-db'
+        repository: 'vysnu96/flag-quiz-without-db'
         command: 'buildAndPush'
-        Dockerfile: '**/tutorials/Flags DB/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/tutorials/Flags/Dockerfile'
         tags: |
-          $(Build.BuildId)
+          $(tag)
