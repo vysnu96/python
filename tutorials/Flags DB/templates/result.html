@@ -3,6 +3,7 @@
 <head>
 <title>Score Card</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='result.css') }}">
+<link rel="icon" type="image/png" sizes="80x80" href="{{ url_for('static', filename='result.png') }}">
 </head>
 
 <body>
@@ -22,19 +23,43 @@
     <div>{{continent}}: {{ score }}/{{ total }}</div>
 </div>
 
-  {% for i in selected_continent %}
-    {% if user_choices[loop.index0] is defined and user_choices[loop.index0] %}
-      <div class="result">
-        <div class="result-img">
-            <img src="{{ url_for('static', filename='images/' + i + '.png') }}" alt="Quiz Image">
-        </div>
-        <div class="result-res">
-            Your response: {{ user_choices[loop.index0] }}<br>
-            Answer: {{ i }}
-        </div>
-      </div>
-    {% endif %}
-  {%endfor%}
+<div>
+    <table>
+        <th> Flag </th>
+        <th>Correct Answer</th>
+        <th>You selected</th>
+        {% for i in selected_continent %}
+
+            <tr>
+                <td><img src="{{ url_for('static', filename='images/' + i + '.png') }}" alt="Quiz Image" class="quiz-image"></td>
+                <td>{{ i }}</td>
+                <td {% if i == user_choices[loop.index0] %} class="correct" {% else %} class="incorrect" {% endif %}>
+                        {% if loop.index0 < user_choices|length %}
+                            {{ user_choices[loop.index0] }}
+                        {% else %}
+                            -
+                        {% endif %}
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+<br>
+
+
+<!--  {% for i in selected_continent %}-->
+<!--    {% if user_choices[loop.index0] is defined and user_choices[loop.index0] %}-->
+<!--      <div class="result">-->
+<!--        <div class="result-img">-->
+<!--            <img src="{{ url_for('static', filename='images/' + i + '.png') }}" alt="Quiz Image">-->
+<!--        </div>-->
+<!--        <div class="result-res">-->
+<!--            Your response: {{ user_choices[loop.index0] }}<br>-->
+<!--            Answer: {{ i }}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    {% endif %}-->
+<!--  {%endfor%}-->
 
 </body>
 </html>
