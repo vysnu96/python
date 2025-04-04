@@ -15,12 +15,14 @@
   cursor: pointer;
 #  margin-left: 20px; /* Add spacing between buttons */
   background: none;
+  text-decoration: none;
 }
 
 .top-bar-button a {
 color: #fff;
 font-family: 'Helvetica';
 font-size: 20px;
+text-decoration: none;
 
 }
 
