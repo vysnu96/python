@@ -9,7 +9,7 @@ on:
 jobs:
   flags:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, 'tutorials/Flags/')
+    # if: contains(github.event.head_commit.modified, 'tutorials/Flags/')
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
