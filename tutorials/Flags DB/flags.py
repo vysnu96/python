@@ -88,7 +88,9 @@ def load_user(username):
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    return "Login required"
+    # return "Login required"
+    flash("Session timed out. Login again.", 'error')
+    return render_template('login.html')
 
 
 @app.route('/', methods=['GET', 'POST'])
